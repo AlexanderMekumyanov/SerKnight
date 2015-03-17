@@ -1,0 +1,11 @@
+D:\Programming\My_Progects\SerKnight(Project)\SerKnight\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+D:\Programming\My_Progects\SerKnight(Project)\SerKnight\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+D:\Programming\My_Progects\SerKnight(Project)\SerKnight\Temp\UnityVS_bin\Debug\UnityEditor.dll
+D:\Programming\My_Progects\SerKnight(Project)\SerKnight\Temp\UnityVS_bin\Debug\UnityEngine.dll
+D:\Programming\My_Progects\SerKnight(Project)\SerKnight\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+D:\Programming\My_Progects\SerKnight(Project)\SerKnight\Temp\UnityVS_bin\Debug\UnityEngine.xml
+D:\Programming\My_Progects\SerKnight(Project)\SerKnight\Temp\UnityVS_bin\Debug\UnityEditor.xml
+D:\Programming\My_Progects\SerKnight(Project)\SerKnight\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+D:\Programming\My_Progects\SerKnight(Project)\SerKnight\obj\Debug\UnityVS.SerKnight.CSharp.csprojResolveAssemblyReference.cache
+D:\Programming\My_Progects\SerKnight(Project)\SerKnight\obj\Debug\Assembly-CSharp.dll
+D:\Programming\My_Progects\SerKnight(Project)\SerKnight\obj\Debug\Assembly-CSharp.pdb
