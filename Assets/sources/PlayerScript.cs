@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerScript : MonoBehaviour 
 {
     public float     maxSpeed     = 10f;
+    public float     curSpeed     = 0.0f;
     public float     jumpForce    = 700f;
     public Transform groundCheck;
     public float     groundRadius = 0.2f;
@@ -14,42 +15,66 @@ public class PlayerScript : MonoBehaviour
     private bool        grounded = false;
     private Rigidbody2D rigidBody;
     private Animator    animator;
+    private Skeleton    skeleton;
+    private Direction   direction;
     
+    private enum Direction
+    {
+        RIGHT,
+        LEFT
+    }
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator  = GetComponent<Animator>();
+        skeleton  = GameObject.Find("Skeleton").GetComponent<Skeleton>();
+        direction = Direction.RIGHT;
     }
     
     void FixedUpdate()
     {
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-        move     = Input.GetAxis("Horizontal");
     }
 
     void Update()
     {
-        if (grounded && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
+        if (grounded && Input.GetKeyDown(KeyCode.UpArrow))
         {
             rigidBody.AddForce(new Vector2(0f, jumpForce));
         }
-        rigidBody.velocity = new Vector2(move * maxSpeed, rigidBody.velocity.y);
-
-        if (move > 0 && !facingRight)
+        
+        if (Input.GetKey(KeyCode.RightArrow))
         {
-            Flip();
+            animator.SetBool("Walk", true);
+            curSpeed = maxSpeed;
+            if (direction == Direction.LEFT)
+            {
+                Flip();
+                direction = Direction.RIGHT;
+            }
         }
-        else if (move < 0 && facingRight)
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            Flip();
+            animator.SetBool("Walk", true);
+            curSpeed = -maxSpeed;
+            if (direction == Direction.RIGHT)
+            {
+                Flip();
+                direction = Direction.LEFT;
+            }
         }
+        else
+        {
+            animator.SetBool("Walk", false);
+            curSpeed = 0.0f;
+        }
+        rigidBody.velocity = new Vector2(curSpeed, rigidBody.velocity.y);
+        Debug.Log("curSpeed = " + curSpeed);
     }
 
     void Flip()
     {
-        //facingRight          = !facingRight;
-        //Vector3 theScale     = transform.localScale;
-        //theScale.x          *= -1;
-        //transform.localScale = theScale;
+        skeleton.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
     }     
 }
