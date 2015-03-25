@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerScript : MonoBehaviour 
+public class PlayerScript : GameObjectBase 
 {
     public float     maxSpeed     = 10f;
     public float     curSpeed     = 0.0f;
@@ -11,7 +11,6 @@ public class PlayerScript : MonoBehaviour
     public LayerMask whatIsGround;
     public float     move;
 
-    private bool        facingRight = true;
     private bool        grounded = false;
     private Rigidbody2D rigidBody;
     private Animator    animator;
@@ -26,10 +25,11 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
-        animator  = GetComponent<Animator>();
-        skeleton  = GameObject.Find("Skeleton").GetComponent<Skeleton>();
-        direction = Direction.RIGHT;
+        rigidBody  = GetComponent<Rigidbody2D>();
+        animator   = GetComponent<Animator>();
+        skeleton   = GameObject.Find("Skeleton").GetComponent<Skeleton>();
+        direction  = Direction.RIGHT;
+        scriptFlag = false;
     }
     
     void FixedUpdate()
