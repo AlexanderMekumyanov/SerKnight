@@ -7,16 +7,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{EF6EBFC2-0E5B-C551-2905-E059877553CB}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.0.0f4</UnityVersion>
@@ -107,6 +105,7 @@
     <Compile Include="Assets\engine\SpritesAndBones\Scripts\Utils\Triangulator.cs" />
     <Compile Include="Assets\engine\SpritesAndBones\Scripts\Utils\Utils.cs" />
     <Compile Include="Assets\engine\SpritesAndBones\Scripts\Utils\Vertices.cs" />
+    <Compile Include="Assets\sources\BackgroundMovementsObject.cs" />
     <Compile Include="Assets\sources\GameObjectBase.cs" />
     <Compile Include="Assets\sources\PlayerScript.cs" />
     <Compile Include="Assets\sources\ScriptManagerScript.cs" />

@@ -39,11 +39,30 @@ public class PlayerScript : GameObjectBase
 
     void Update()
     {
-        if (grounded && Input.GetKeyDown(KeyCode.UpArrow))
+        if (!scriptFlag)
+        {
+            BaseLogic();
+        }
+        else
+        {
+            ScriptLogic();
+        }
+        
+    }
+
+    void BaseLogic()
+    {
+        if (grounded && Input.GetKeyDown(KeyCode.Space))
         {
             rigidBody.AddForce(new Vector2(0f, jumpForce));
         }
-        
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            animator.SetBool("Yeah", true);
+            animator.SetBool("Walk", false);
+        }
+        else 
         if (Input.GetKey(KeyCode.RightArrow))
         {
             animator.SetBool("Walk", true);
@@ -73,8 +92,27 @@ public class PlayerScript : GameObjectBase
         Debug.Log("curSpeed = " + curSpeed);
     }
 
+    void ScriptLogic()
+    {
+        switch (scriptCommand)
+        {
+            case "Yeah":
+            {
+                animator.SetBool("Walk", false);
+                animator.SetBool("Yeah", true);
+                break;
+            }
+        }
+    }
+
     void Flip()
     {
         skeleton.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
-    }     
+    }
+
+    public void StopScript()
+    {
+        scriptFlag = false;
+        animator.SetBool("Yeah", false);
+    }
 }

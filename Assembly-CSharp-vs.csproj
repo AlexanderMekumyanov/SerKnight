@@ -97,6 +97,7 @@
      <Compile Include="Assets\engine\SpritesAndBones\Scripts\Utils\Triangulator.cs" />
      <Compile Include="Assets\engine\SpritesAndBones\Scripts\Utils\Utils.cs" />
      <Compile Include="Assets\engine\SpritesAndBones\Scripts\Utils\Vertices.cs" />
+     <Compile Include="Assets\sources\BackgroundMovementsObject.cs" />
      <Compile Include="Assets\sources\GameObjectBase.cs" />
      <Compile Include="Assets\sources\PlayerScript.cs" />
      <Compile Include="Assets\sources\ScriptManagerScript.cs" />
