@@ -89,7 +89,6 @@ public class PlayerScript : GameObjectBase
             curSpeed = 0.0f;
         }
         rigidBody.velocity = new Vector2(curSpeed, rigidBody.velocity.y);
-        Debug.Log("curSpeed = " + curSpeed);
     }
 
     void ScriptLogic()

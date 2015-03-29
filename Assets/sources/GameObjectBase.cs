@@ -3,15 +3,15 @@ using System.Collections;
 
 public struct ScriptParameter
 {
-    public string ScriptCommand;
-    public int[]  ArrayOfParameter;
+    public string   ScriptCommand;
+    public string[] ArrayOfParameter;
 }
 
 public class GameObjectBase : MonoBehaviour
 {
-    protected bool   scriptFlag;
-    protected string scriptCommand;
-    protected int[]  arrayOfParameter;
+    protected bool     scriptFlag;
+    protected string   scriptCommand;
+    protected string[] arrayOfParameter;
 
     public void ReceiveScriptFlag(ScriptParameter scriptParameter)
     {

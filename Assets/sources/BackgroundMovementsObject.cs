@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class BackgroundMovementsObject : GameObjectBase 
 {
@@ -41,16 +42,16 @@ public class BackgroundMovementsObject : GameObjectBase
                 animator.SetBool("Fly", true);
 
                 flightTimer += Time.deltaTime;
-                flightTime  = arrayOfParameter[2];
+                flightTime   = Convert.ToSingle(arrayOfParameter[2]);
                 if (flightTime < flightTimer)
                 {
-                    this.transform.position = new Vector3(arrayOfParameter[0], arrayOfParameter[1]);
+                    this.transform.position = new Vector3(Convert.ToSingle(arrayOfParameter[0]), Convert.ToSingle(arrayOfParameter[1]));
                     scriptFlag = false;
                 }
                 else
                 { 
                     float p = flightTimer / flightTime;
-                    this.transform.position = new Vector3(arrayOfParameter[0] * p + startPos.x * (1.0f - p), arrayOfParameter[1] * p + startPos.y * (1.0f - p), 0.0f);
+                    this.transform.position = new Vector3(Convert.ToSingle(arrayOfParameter[0]) * p + startPos.x * (1.0f - p), Convert.ToSingle(arrayOfParameter[1]) * p + startPos.y * (1.0f - p), 0.0f);
                 }
 
                 break;

@@ -8,7 +8,7 @@ public class SpecSpace : MonoBehaviour
     public GameObject           doingObject;
     public GameObject           scriptManagerObject;
     public string               scriptCommand;
-    public int[]                arrayOfParameter;
+    public string[]             arrayOfParameter;
 
     private ScriptManagerScript scriptManagerScript;
     private bool                flagScript;
