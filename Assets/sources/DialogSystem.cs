@@ -10,12 +10,12 @@ public class DialogSystem
 {
     static DialogSystem dialogSystem;
 
-    private XmlDocument text;
+    private XmlDocument dialogsFile;
+    private String XMLFileName;
 
     public DialogSystem ()
     {
-        text = new XmlDocument();
-        text.Load("Assets\\resources\\files\\text.xml");
+        XMLFileName = "Assets/resources/files/text.xml";
     }
 
     public static DialogSystem GetDialogSystem()
@@ -31,9 +31,27 @@ public class DialogSystem
         }
     }
 
-    public string GetDialogById(string id)
+    public List<string> GetDialogById(string id)
     {
-        XmlNode node = text.SelectSingleNode(id);
-        return node.InnerText;
+        // TODO Переписать Нахрен!
+        XmlTextReader reader = new XmlTextReader(XMLFileName);
+        List<string> texts   = new List<string>();
+
+        while (reader.Read())
+        {
+            if (reader.NodeType == XmlNodeType.Element && reader.Name == id)
+            {
+                int i = 0;
+                while (reader.Read())
+                {
+                    if (reader.NodeType == XmlNodeType.Element && reader.Name == ("text_" + i))
+                    {
+                        texts.Add(reader.ReadElementContentAsString());
+                        i++;
+                    }
+                }
+            }
+        }
+        return texts;
     }
 }

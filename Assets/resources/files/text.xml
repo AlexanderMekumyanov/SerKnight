@@ -1,2 +1,6 @@
 <?xml version="1.0"?>
-<TEXT_TEST>Тест типа</TEXT_TEST>
+<DIALOG_1>
+  <text_0>Hello!</text_0>
+  <text_1>Im your first dialog</text_1>
+  <text_2>Nice to meet you!:)</text_2>
+</DIALOG_1>
