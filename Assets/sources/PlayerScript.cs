@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class PlayerScript : GameObjectBase 
+public class PlayerScript : GameObjectBase, IMovableActor, IAnimationActor
 {
     public float     maxSpeed     = 10f;
     public float     curSpeed     = 0.0f;
@@ -10,10 +11,33 @@ public class PlayerScript : GameObjectBase
     public float     groundRadius = 0.2f;
     public LayerMask whatIsGround;
     public float     move;
+    // TODO Переписать нахрен
+    public List<string> animations
+    {
+        get
+        {
+            return animations;
+        }
+        set
+        {
+            animations = value;
+        }
+    }
+
+    public Animator animator
+    {
+        get
+        {
+            return animator;
+        }
+        set
+        {
+            animator = value;
+        }
+    }
 
     private bool        grounded = false;
     private Rigidbody2D rigidBody;
-    private Animator    animator;
     private Skeleton    skeleton;
     private Direction   direction;
     
@@ -59,13 +83,15 @@ public class PlayerScript : GameObjectBase
 
         if (Input.GetKey(KeyCode.D))
         {
-            animator.SetBool("Yeah", true);
-            animator.SetBool("Walk", false);
+            PlayAnimation("Yeah");
+            //animator.SetBool("Yeah", true);
+            //animator.SetBool("Walk", false);
         }
         else 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            animator.SetBool("Walk", true);
+            //animator.SetBool("Walk", true);
+            PlayAnimation("Walk");
             curSpeed = maxSpeed;
             if (direction == Direction.LEFT)
             {
@@ -75,7 +101,8 @@ public class PlayerScript : GameObjectBase
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            animator.SetBool("Walk", true);
+            PlayAnimation("Walk");
+            //animator.SetBool("Walk", true);
             curSpeed = -maxSpeed;
             if (direction == Direction.RIGHT)
             {
@@ -85,7 +112,8 @@ public class PlayerScript : GameObjectBase
         }
         else
         {
-            animator.SetBool("Walk", false);
+            StopAllAnimation();
+            //animator.SetBool("Walk", false);
             curSpeed = 0.0f;
         }
         rigidBody.velocity = new Vector2(curSpeed, rigidBody.velocity.y);
@@ -113,5 +141,28 @@ public class PlayerScript : GameObjectBase
     {
         scriptFlag = false;
         animator.SetBool("Yeah", false);
+    }
+
+    public void PlayAnimation(string AnimName)
+    {
+        for (int i = 0; i < animations.Count; i++)
+        {
+            animator.SetBool(animations[i], false);
+        }
+
+        animator.SetBool(AnimName, true);
+    }
+
+    public void Move(Vector2 destPos)
+    {
+
+    }
+
+    public void StopAllAnimation()
+    {
+        for (int i = 0; i < animations.Count; i++)
+        {
+            animator.SetBool(animations[i], false);
+        }
     }
 }
