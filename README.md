@@ -1,6 +1,8 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Основные компоненты для создание платформер игры на Unity 5.0.0.0
+1. Не забудьте сделать meta file visible
+2. Перед апдейтом или коммитом выключить юнити:)
 
 ### What is this repository for? ###
 
