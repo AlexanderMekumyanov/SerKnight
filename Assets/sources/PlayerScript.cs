@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerScript : GameObjectBase, IMovableActor, IAnimationActor
+public class PlayerScript : Actor
 {
     public float     maxSpeed     = 10f;
     public float     curSpeed     = 0.0f;
@@ -11,30 +11,6 @@ public class PlayerScript : GameObjectBase, IMovableActor, IAnimationActor
     public float     groundRadius = 0.2f;
     public LayerMask whatIsGround;
     public float     move;
-    // TODO Переписать нахрен
-    public List<string> animations
-    {
-        get
-        {
-            return animations;
-        }
-        set
-        {
-            animations = value;
-        }
-    }
-
-    public Animator animator
-    {
-        get
-        {
-            return animator;
-        }
-        set
-        {
-            animator = value;
-        }
-    }
 
     private bool        grounded = false;
     private Rigidbody2D rigidBody;
@@ -50,10 +26,18 @@ public class PlayerScript : GameObjectBase, IMovableActor, IAnimationActor
     void Start()
     {
         rigidBody  = GetComponent<Rigidbody2D>();
-        animator   = GetComponent<Animator>();
         skeleton   = GameObject.Find("Skeleton").GetComponent<Skeleton>();
         direction  = Direction.RIGHT;
-        scriptFlag = false;
+        ScriptFlag = false;
+        InitAnimations();
+    }
+
+    void InitAnimations()
+    {
+        Animator = gameObject.GetComponent<Animator>();
+        Animations = new List<string>();
+        Animations.Add("Yeah");
+        Animations.Add("Walk");
     }
     
     void FixedUpdate()
@@ -63,7 +47,7 @@ public class PlayerScript : GameObjectBase, IMovableActor, IAnimationActor
 
     void Update()
     {
-        if (!scriptFlag)
+        if (!ScriptFlag)
         {
             BaseLogic();
         }
@@ -84,13 +68,10 @@ public class PlayerScript : GameObjectBase, IMovableActor, IAnimationActor
         if (Input.GetKey(KeyCode.D))
         {
             PlayAnimation("Yeah");
-            //animator.SetBool("Yeah", true);
-            //animator.SetBool("Walk", false);
         }
         else 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            //animator.SetBool("Walk", true);
             PlayAnimation("Walk");
             curSpeed = maxSpeed;
             if (direction == Direction.LEFT)
@@ -102,7 +83,6 @@ public class PlayerScript : GameObjectBase, IMovableActor, IAnimationActor
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             PlayAnimation("Walk");
-            //animator.SetBool("Walk", true);
             curSpeed = -maxSpeed;
             if (direction == Direction.RIGHT)
             {
@@ -113,7 +93,6 @@ public class PlayerScript : GameObjectBase, IMovableActor, IAnimationActor
         else
         {
             StopAllAnimation();
-            //animator.SetBool("Walk", false);
             curSpeed = 0.0f;
         }
         rigidBody.velocity = new Vector2(curSpeed, rigidBody.velocity.y);
@@ -121,12 +100,14 @@ public class PlayerScript : GameObjectBase, IMovableActor, IAnimationActor
 
     void ScriptLogic()
     {
-        switch (scriptCommand)
+        switch (ScriptCommand)
         {
             case "Yeah":
             {
-                animator.SetBool("Walk", false);
-                animator.SetBool("Yeah", true);
+                //animator.SetBool("Walk", false);
+                //animator.SetBool("Yeah", true);
+                StopAllAnimation();
+                PlayAnimation("Yeah");
                 break;
             }
         }
@@ -139,30 +120,7 @@ public class PlayerScript : GameObjectBase, IMovableActor, IAnimationActor
 
     public void StopScript()
     {
-        scriptFlag = false;
-        animator.SetBool("Yeah", false);
-    }
-
-    public void PlayAnimation(string AnimName)
-    {
-        for (int i = 0; i < animations.Count; i++)
-        {
-            animator.SetBool(animations[i], false);
-        }
-
-        animator.SetBool(AnimName, true);
-    }
-
-    public void Move(Vector2 destPos)
-    {
-
-    }
-
-    public void StopAllAnimation()
-    {
-        for (int i = 0; i < animations.Count; i++)
-        {
-            animator.SetBool(animations[i], false);
-        }
+        ScriptFlag = false;
+        Animator.SetBool("Yeah", false);
     }
 }

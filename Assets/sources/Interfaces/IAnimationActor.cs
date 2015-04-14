@@ -4,17 +4,9 @@ using System.Collections.Generic;
 
 interface IAnimationActor
 {
-    Animator animator
-    {
-        get;
-        set;
-    }
+    Animator Animator { get; set; }
 
-    List<string> animations
-    {
-        get; 
-        set;
-    }
+    List<string> Animations{ get; set;}
 
     void InitAnimations();
     void PlayAnimation(string animationName);

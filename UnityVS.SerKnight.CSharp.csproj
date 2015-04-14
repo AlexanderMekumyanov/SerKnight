@@ -107,6 +107,7 @@
     <Compile Include="Assets\engine\SpritesAndBones\Scripts\Utils\Triangulator.cs" />
     <Compile Include="Assets\engine\SpritesAndBones\Scripts\Utils\Utils.cs" />
     <Compile Include="Assets\engine\SpritesAndBones\Scripts\Utils\Vertices.cs" />
+    <Compile Include="Assets\sources\Actor.cs" />
     <Compile Include="Assets\sources\BackgroundMovementsObject.cs" />
     <Compile Include="Assets\sources\CutSceneSystem.cs" />
     <Compile Include="Assets\sources\DialogSystem.cs" />

@@ -3,5 +3,8 @@ using System;
 
 interface IMovableActor
 {
-    void Move(Vector2 pos);
+    Vector2 StartPos { get; set; }
+    Vector2 DestPos { get; set; }
+
+    void Move(Vector2 destPos, float delayTime);
 }
