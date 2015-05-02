@@ -13,6 +13,7 @@ public abstract class Actor : MonoBehaviour, IAnimationActor, IMovableActor, ISc
 
     public Animator Animator { get; set; }
     public List<string> Animations { get; set; }
+    public delegate void Action();
 
     public void ReceiveScriptFlag(ScriptParameter scriptParameter)
     {

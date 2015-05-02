@@ -9,8 +9,7 @@ public class SpecSpace : MonoBehaviour
     public GameObject           scriptManagerObject;
     public string               scriptCommand;
     public string[]             arrayOfParameter;
-
-    private ScriptManagerScript scriptManagerScript;
+    
     private bool                flagScript;
 
 	void Start ()
@@ -32,10 +31,8 @@ public class SpecSpace : MonoBehaviour
 
         if (other.gameObject.tag == objectTag)
         {
-            ScriptParameter scriptParameter;
-            scriptParameter.ScriptCommand    = scriptCommand;
-            scriptParameter.ArrayOfParameter = arrayOfParameter;
-            doingObject.SendMessage("ReceiveScriptFlag", scriptParameter);
+            ScriptSystem scriptSystem = ScriptSystem.GetInstance();
+            scriptSystem.SetScriptCommand(doingObject, scriptCommand, arrayOfParameter);
             flagScript = true;
         }
     }
