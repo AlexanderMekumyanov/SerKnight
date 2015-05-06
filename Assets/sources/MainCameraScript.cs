@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
-public class MainCameraScript : MonoBehaviour 
+public class MainCameraScript : Actor 
 {
     public float dampTime = 0.15f;  
     public Transform target;
@@ -10,12 +11,19 @@ public class MainCameraScript : MonoBehaviour
 	
     void Start()
     {
-
     }
 
 	void Update () 
     {
-        if (target)
+        if (ScriptFlag)
+        {
+            ScriptLogic();
+        }
+        else if (IsMoving)
+        {
+            MoveUpdate();
+        }
+        else if (target)
         {
             Vector3 point = Camera.main.WorldToViewportPoint(new Vector3(target.position.x, target.position.y + 0.75f, target.position.z));
             Vector3 delta = new Vector3(target.position.x, target.position.y + 0.75f, target.position.z) - Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
@@ -24,4 +32,17 @@ public class MainCameraScript : MonoBehaviour
             transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
         }
 	}
+
+    void ScriptLogic()
+    {
+        switch(ScriptCommand)
+        {
+            case "GoToCave":
+            {
+                ScriptFlag = false;
+                Move(new Vector3(transform.position.x, transform.position.y, Convert.ToSingle(ArrayOfParameter[0])), Convert.ToSingle(ArrayOfParameter[1]));
+                break;
+            }
+        }
+    }
 }

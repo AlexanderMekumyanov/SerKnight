@@ -34,6 +34,7 @@ public class SpecSpace : MonoBehaviour
             ScriptSystem scriptSystem = ScriptSystem.GetInstance();
             scriptSystem.SetScriptCommand(doingObject, scriptCommand, arrayOfParameter);
             flagScript = true;
+            Destroy(gameObject);
         }
     }
 }

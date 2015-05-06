@@ -110,8 +110,9 @@
      <Compile Include="Assets\sources\MainCameraScript.cs" />
      <Compile Include="Assets\sources\Player\PlayerInventory.cs" />
      <Compile Include="Assets\sources\Player\PlayerScript.cs" />
-     <Compile Include="Assets\sources\ScriptSystem.cs" />
-     <Compile Include="Assets\sources\SpecSpace.cs" />
+     <Compile Include="Assets\sources\ScriptSystem\KeyCondition.cs" />
+     <Compile Include="Assets\sources\ScriptSystem\ScriptSystem.cs" />
+     <Compile Include="Assets\sources\ScriptSystem\SpecSpace.cs" />
      <None Include="Assets\engine\SpritesAndBones\license-attributions.txt" />
      <None Include="Assets\resources\files\text.xml" />
  <Reference Include="UnityEngine.UI">
