@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class DialogWindow : GameObjectBase 
+public class DialogWindow : ScriptableActor 
 {
     public float showingTime = 1;
     public float hidingTime  = 1;
@@ -38,10 +38,6 @@ public class DialogWindow : GameObjectBase
 	
 	void Update() 
     {
-        if (scriptFlag)
-        {
-            ScriptLogic();
-        }
         if (showing)
         {
             Show();
@@ -52,20 +48,12 @@ public class DialogWindow : GameObjectBase
         }
 	}
 
-    void ScriptLogic()
+    public void ShowDialog(string textID)
     {
-        switch (scriptCommand)
-        {
-            case "ShowDialog":
-            {
-                showing     = true;
-                dialogTexts = dialogSystem.GetDialogById(arrayOfParameter[0]);
-                uiText.text = dialogTexts[0];
-                currText    = 0;
-                scriptFlag  = false;
-                break;
-            }
-        }
+        showing = true;
+        dialogTexts = dialogSystem.GetDialogById(textID);//arrayOfParameter[0]);
+        uiText.text = dialogTexts[0];
+        currText = 0;
     }
 
     private void Show()
@@ -80,6 +68,7 @@ public class DialogWindow : GameObjectBase
         {
             showing = false;
             showingTimer = 0;
+            this.transform.position = new Vector2(this.transform.position.x, destY);
         }
     }
 
@@ -95,6 +84,7 @@ public class DialogWindow : GameObjectBase
         {
             hiding = false;
             hidingTimer = 0;
+            this.transform.position = new Vector2(this.transform.position.x, startPosY);
         }
     }
 

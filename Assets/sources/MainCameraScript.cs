@@ -2,28 +2,24 @@
 using System;
 using System.Collections;
 
-public class MainCameraScript : Actor 
+public class MainCameraScript : MonoBehaviour 
 {
     public float dampTime = 0.15f;  
     public Transform target;
 
     private Vector3 velocity = Vector3.zero;
-	
+    private Camera myCamera;
+    private float startCameraSize;
     void Start()
     {
+        myCamera = Camera.main;
+        startCameraSize = myCamera.orthographicSize;
     }
 
 	void Update () 
     {
-        if (ScriptFlag)
-        {
-            ScriptLogic();
-        }
-        else if (IsMoving)
-        {
-            MoveUpdate();
-        }
-        else if (target)
+        UpdateInwardAnimation();
+        if (target)
         {
             Vector3 point = Camera.main.WorldToViewportPoint(new Vector3(target.position.x, target.position.y + 0.75f, target.position.z));
             Vector3 delta = new Vector3(target.position.x, target.position.y + 0.75f, target.position.z) - Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
@@ -33,15 +29,45 @@ public class MainCameraScript : Actor
         }
 	}
 
-    void ScriptLogic()
+    private float destCameraSize;
+    private float delay;
+    private bool bInwardAnimation = false;
+    private GameObject insideChamber;
+    private GameObject outsideChamber;
+    public void StartInwardAnimation(GameObject insideChamber, GameObject outsideChamber, float destCameraSize, float delay)
     {
-        switch(ScriptCommand)
+        this.delay = delay;
+        this.destCameraSize = destCameraSize;
+        this.insideChamber = insideChamber;
+        this.outsideChamber = outsideChamber;
+        bInwardAnimation = true;
+    }
+
+    private bool bZoom = false;
+    void UpdateInwardAnimation()
+    {
+        if (bInwardAnimation)
         {
-            case "GoToCave":
+            if (!bZoom)
             {
-                ScriptFlag = false;
-                Move(new Vector3(transform.position.x, transform.position.y, Convert.ToSingle(ArrayOfParameter[0])), Convert.ToSingle(ArrayOfParameter[1]));
-                break;
+                this.myCamera.orthographicSize = Mathf.Lerp(this.myCamera.orthographicSize, destCameraSize, delay * Time.deltaTime);
+                if (Mathf.Abs(destCameraSize - this.myCamera.orthographicSize) < 0.2f)
+                {
+                    bZoom = true;
+                    this.myCamera.orthographicSize = destCameraSize;
+                    outsideChamber.SetActive(false);
+                    insideChamber.SetActive(true);
+                }
+            }
+            else
+            {
+                this.myCamera.orthographicSize = Mathf.Lerp(this.myCamera.orthographicSize, startCameraSize, delay * Time.deltaTime);
+                if (Mathf.Abs(startCameraSize - this.myCamera.orthographicSize) < 0.2f)
+                {
+                    bZoom = false;
+                    bInwardAnimation = false;
+                    this.myCamera.orthographicSize = startCameraSize;
+                }
             }
         }
     }

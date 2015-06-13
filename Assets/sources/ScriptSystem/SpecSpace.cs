@@ -6,7 +6,6 @@ public class SpecSpace : MonoBehaviour
 {
     public string               objectTag;
     public GameObject           doingObject;
-    public GameObject           scriptManagerObject;
     public string               scriptCommand;
     public string[]             arrayOfParameter;
     

@@ -11,6 +11,7 @@ public class KeyCondition : MonoBehaviour
     public bool       isLimited = false;
 
     private Renderer objectRenderer;
+    private bool     active;
 
 	void Start () 
     {
@@ -25,14 +26,23 @@ public class KeyCondition : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        objectRenderer.enabled = true;
-        if (other.gameObject.tag == objectTag && Input.GetKey(keyKode))
+        if (gameObject.active)
         {
-            ScriptSystem scriptSystem = ScriptSystem.GetInstance();
-            scriptSystem.SetScriptCommand(doingObject, scriptCommand, arrayOfParameter);
-            if (isLimited)
+            
+            if (other.gameObject.tag == objectTag)
             {
-                Destroy(gameObject);
+                objectRenderer.enabled = true;
+                if (Input.GetKeyUp(keyKode))
+                {
+                    ScriptSystem scriptSystem = ScriptSystem.GetInstance();
+                    scriptSystem.SetScriptCommand(doingObject, scriptCommand, arrayOfParameter);
+                    if (isLimited)
+                    {
+                        gameObject.SetActive(false);
+                        Destroy(gameObject);
+                        Debug.Log("KetCondition: OK!!!");
+                    }
+                }
             }
         }
     }

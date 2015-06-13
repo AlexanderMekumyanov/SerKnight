@@ -10,7 +10,6 @@ public class DialogSystem
 {
     static DialogSystem dialogSystem;
 
-    private XmlDocument dialogsFile;
     private String XMLFileName;
 
     public DialogSystem ()
