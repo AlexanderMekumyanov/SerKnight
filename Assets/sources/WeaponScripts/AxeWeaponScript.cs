@@ -14,7 +14,8 @@ public class AxeWeaponScript : MonoBehaviour
     {
         if (other.tag == "Spider" && playerScript.isAttacking)
         {
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<SpiderScript>().Damaging();
+            playerScript.CannotAttack();
         }
     }
 }

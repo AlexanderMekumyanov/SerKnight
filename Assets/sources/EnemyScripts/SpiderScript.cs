@@ -12,6 +12,8 @@ public class SpiderScript : PhysicableActor
     public float preAttackTime;
     private float preAttackTimer;
 
+    public int health;
+
     private bool prevGrounded = true;
 
 	void Start () 
@@ -86,6 +88,26 @@ public class SpiderScript : PhysicableActor
             else
             {
                 AttackUpdate();
+            }
+        }
+    }
+
+    public void Damaging()
+    {
+        if (--health <= 0)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            float deltaX = playerScript.transform.position.x - this.transform.position.x;
+            if (deltaX < 0)
+            {
+                rigidBody.AddForce(new Vector2(jumpForce, 0));
+            }
+            else
+            {
+                rigidBody.AddForce(new Vector2(-jumpForce, 0));
             }
         }
     }
