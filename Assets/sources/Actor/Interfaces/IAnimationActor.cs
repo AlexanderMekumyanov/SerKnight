@@ -10,5 +10,6 @@ interface IAnimationActor
 
     void InitAnimations();
     void PlayAnimation(string animationName);
+    void StopAnimation(string animationName);
     void StopAllAnimation();
 }

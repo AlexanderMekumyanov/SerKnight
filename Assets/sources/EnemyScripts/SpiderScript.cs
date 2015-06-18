@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SpiderScript : PhysicableActor
 {
@@ -19,7 +20,17 @@ public class SpiderScript : PhysicableActor
 	void Start () 
     {
         InitPhysics();
+
+        InitAnimations();
 	}
+
+    public override void InitAnimations()
+    {
+        Animator = gameObject.GetComponent<Animator>();
+        Animations = new List<string>();
+        Animations.Add("Attack");
+        Animations.Add("Moving");
+    }
 
     public void WakeUp()
     {
@@ -33,28 +44,27 @@ public class SpiderScript : PhysicableActor
         if (!prevGrounded && grounded && Attacking)
         {
             Attacking = false;
+            StopAnimation("Attack");
         }
         prevGrounded = grounded;
     }
 
     void AttackUpdate()
     {
-        if (preAttackTimer > 0)
+        PlayAnimation("Attack");
+    }
+
+    public void Attack()
+    {
+        preAttackTimer = preAttackTime;
+        float deltaX = playerScript.transform.position.x - this.transform.position.x;
+        if (deltaX < 0)
         {
-            preAttackTimer -= Time.deltaTime;
+            rigidBody.AddForce(new Vector2(-jumpForce, jumpForce));
         }
         else
         {
-            preAttackTimer = preAttackTime;
-            float deltaX = playerScript.transform.position.x - this.transform.position.x;
-            if (deltaX < 0)
-            {
-                rigidBody.AddForce(new Vector2(-jumpForce, jumpForce));
-            }
-            else
-            {
-                rigidBody.AddForce(new Vector2(jumpForce, jumpForce));
-            }
+            rigidBody.AddForce(new Vector2(jumpForce, jumpForce));
         }
     }
 
@@ -65,11 +75,13 @@ public class SpiderScript : PhysicableActor
         {
             Attacking = true;
             preAttackTimer = preAttackTime;
+            StopAnimation("Moving");
         }
         else
         {
             Move(playerScript.transform.position, MovingType.MoveTowards, Mathf.Abs(deltaX) / maxSpeed);
             MoveUpdate();
+            PlayAnimation("Moving");
         }
     }
 	

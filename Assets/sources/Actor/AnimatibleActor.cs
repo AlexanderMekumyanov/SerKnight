@@ -17,6 +17,11 @@ public abstract class AnimatibleActor : ScriptableActor, IAnimationActor
         Animator.SetBool(animationName, true);
     }
 
+    public virtual void StopAnimation(string animationName)
+    {
+        Animator.SetBool(animationName, false);
+    }
+
     public virtual void StopAllAnimation()
     {
         for (int i = 0; i < Animations.Count; i++)

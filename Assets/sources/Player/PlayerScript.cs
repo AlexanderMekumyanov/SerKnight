@@ -21,7 +21,7 @@ public class PlayerScript : PhysicableActor
         ArmoredJacket.GetComponent<Renderer>().enabled   = false;
         InitAnimations();
 
-        skeleton = GameObject.Find("Skeleton").GetComponent<Skeleton>();
+        skeleton = gameObject.GetComponentInChildren<Skeleton>();
     }
 
     public override void InitAnimations()
