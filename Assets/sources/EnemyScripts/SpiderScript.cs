@@ -41,7 +41,7 @@ public class SpiderScript : PhysicableActor
     {
         PhysicsUpdate();
 
-        if (!prevGrounded && grounded && Attacking)
+        if (grounded && Attacking)
         {
             Attacking = false;
             StopAnimation("Attack");
