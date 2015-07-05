@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using System.Xml;
+using System.IO;
 using System.Xml.Serialization;
 
 public class DialogSystem
@@ -42,6 +43,10 @@ public class DialogSystem
                 int i = 0;
                 while (reader.Read())
                 {
+                    if (reader.NodeType == XmlNodeType.EndElement && reader.Name == id)
+                    {
+                        break;
+                    }
                     if (reader.NodeType == XmlNodeType.Element && reader.Name == ("text_" + i))
                     {
                         texts.Add(reader.ReadElementContentAsString());
@@ -50,6 +55,8 @@ public class DialogSystem
                 }
             }
         }
+        reader.Close();
+
         return texts;
     }
 }

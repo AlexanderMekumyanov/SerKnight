@@ -51,6 +51,16 @@ public class PlayerInventory
         {
             return true;
         }
+        GameObject isWeapon = null;
+        if (weapons.TryGetValue(id, out isWeapon))
+        {
+            return true;
+        }
         return false;
+    }
+
+    public GameObject GetCurrentWeapon()
+    {
+        return currentWeapon;
     }
 }

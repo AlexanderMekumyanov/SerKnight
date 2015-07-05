@@ -18,7 +18,7 @@ public class DogScripts : PhysicableActor
 
     public override void InitAnimations()
     {
-        Animator = gameObject.GetComponent<Animator>();
+        myAnimator = gameObject.GetComponent<Animator>();
         Animations = new List<string>();
         Animations.Add("Moving");
     }

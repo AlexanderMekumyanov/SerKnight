@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 interface IAnimationActor
 {
-    Animator Animator { get; set; }
+    Animator myAnimator { get; set; }
 
     List<string> Animations{ get; set;}
 

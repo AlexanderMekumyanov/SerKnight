@@ -3,7 +3,7 @@ using UnityEngine;
 public class GameSystem
 {
     private static GameSystem instance;
-    private PlayerScript player;
+    
 
     public static GameSystem GetInstance()
     {
@@ -16,18 +16,8 @@ public class GameSystem
 
     public GameSystem()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerScript>();
+        
     }
 
-    public PlayerScript Player
-    {
-        get
-        {
-            return player;
-        }
-        set
-        {
-            player = value;
-        }
-    }
+   
 }

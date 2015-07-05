@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AxeWeaponScript : MonoBehaviour 
+public class AxeWeaponScript : WeaponBase 
 {
     PlayerScript playerScript;
 
 	void Start () 
     {
-        playerScript = GameSystem.GetInstance().Player;
+        playerScript = GameObject.Find("GameManager").GetComponent<GameManager>().Player;
 	}
 
     void OnTriggerStay2D(Collider2D other)

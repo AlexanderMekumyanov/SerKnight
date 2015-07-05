@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using UnityEditor;
+
 public class PlayerScript : PhysicableActor
 {
     private Skeleton    skeleton;
 
     private GameObject  ArmoredJacket;
     private GameObject  ArmoredTrousers;
+    private GameObject  weapon;
 
     void Start()
     {
@@ -22,11 +25,13 @@ public class PlayerScript : PhysicableActor
         InitAnimations();
 
         skeleton = gameObject.GetComponentInChildren<Skeleton>();
+
+        weapon = this.transform.Find("Weapon").gameObject;
     }
 
     public override void InitAnimations()
     {
-        Animator = gameObject.GetComponent<Animator>();
+        myAnimator = gameObject.GetComponent<Animator>();
         Animations = new List<string>();
         Animations.Add("Yeah");
         Animations.Add("Walk");
@@ -89,6 +94,7 @@ public class PlayerScript : PhysicableActor
     void Flip()
     {
         skeleton.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
+        weapon.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
     }
 
     public void Equipt(string itemName)
@@ -129,5 +135,29 @@ public class PlayerScript : PhysicableActor
     public void CannotAttack()
     {
         isAttacking = false;
+    }
+
+    public void WeaponEquipt(string name)
+    {
+        PlayerInventory.GetPlayerInventory().EquiptWeapon(name);
+
+        WeaponBase myWeapon = PlayerInventory.GetPlayerInventory().GetCurrentWeapon().GetComponent<WeaponBase>();
+        myWeapon.transform.SetParent(weapon.transform);
+        myWeapon.transform.localPosition = myWeapon.weaponPosition;
+        myWeapon.transform.Rotate(myWeapon.weaponRotation);
+
+        AnimatorOverrideController overrideController = new AnimatorOverrideController();
+        overrideController.runtimeAnimatorController = myAnimator.runtimeAnimatorController;
+        overrideController["Attack"] = myWeapon.weaponAnim;
+        myAnimator.runtimeAnimatorController = overrideController;
+    }
+
+    public void AddNewWeapon(string weaponName)
+    {
+        GameObject newWeapon = (GameObject)Instantiate(Resources.Load("prefabs/weapons/" + weaponName) as GameObject, new Vector3(0, 0, 0), Quaternion.identity);
+        newWeapon.name = weaponName;
+
+        PlayerInventory.GetPlayerInventory().AddNewWeapon(newWeapon.name, newWeapon);
+        WeaponEquipt(newWeapon.name);
     }
 }

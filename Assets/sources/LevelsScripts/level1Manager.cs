@@ -6,10 +6,13 @@ public class level1Manager : ScriptableActor
     private bool bDressingClothes = false;
     private bool bHaveAxe = false;
     private bool bNextLevel = false;
+    private SpecSpace nextLevel;
 
     void Start () 
     {
         InitLevel();
+        nextLevel = GameObject.Find("NextLevel").GetComponent<SpecSpace>();
+        nextLevel.gameObject.SetActive(false);
 	}
 
     void InitLevel()
@@ -35,6 +38,7 @@ public class level1Manager : ScriptableActor
         if (bDressingClothes && bHaveAxe && !bNextLevel)
         {
             bNextLevel = true;
+            nextLevel.gameObject.SetActive(true);
             GameObject.Find("NextLevel").SetActive(true);
         }
 	}

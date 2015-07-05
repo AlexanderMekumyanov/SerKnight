@@ -24,7 +24,7 @@ public class DialogWindow : ScriptableActor
 	void Start() 
     {
         uiText      = this.gameObject.GetComponentInChildren<Text>();
-        startPosY   = this.transform.position.y;
+        startPosY   = this.transform.localPosition.y;
         uiText.text = "";
         
         dialogSystem = DialogSystem.GetDialogSystem();
@@ -62,13 +62,13 @@ public class DialogWindow : ScriptableActor
         if (showingTimer < showingTime)
         {
             float p                 = showingTimer / showingTime;
-            this.transform.position = new Vector3(this.transform.position.x, destY * p + startPosY * (1.0f - p), 0.0f);
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x, destY * p + startPosY * (1.0f - p), 0.0f);
         }
         else
         {
             showing = false;
             showingTimer = 0;
-            this.transform.position = new Vector2(this.transform.position.x, destY);
+            this.transform.localPosition = new Vector2(this.transform.localPosition.x, destY);
         }
     }
 
@@ -78,13 +78,13 @@ public class DialogWindow : ScriptableActor
         if (hidingTimer < hidingTime)
         {
             float p                 = hidingTimer / hidingTime;
-            this.transform.position = new Vector3(this.transform.position.x, startPosY * p + destY * (1.0f - p), 0.0f);
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x, startPosY * p + destY * (1.0f - p), 0.0f);
         }
         else
         {
             hiding = false;
             hidingTimer = 0;
-            this.transform.position = new Vector2(this.transform.position.x, startPosY);
+            this.transform.localPosition = new Vector2(this.transform.localPosition.x, startPosY);
         }
     }
 
