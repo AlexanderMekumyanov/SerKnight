@@ -79,7 +79,8 @@ public class SpiderScript : PhysicableActor
         }
         else
         {
-            Move(playerScript.transform.position, MovingType.MoveTowards, Mathf.Abs(deltaX) / maxSpeed);
+            Vector3 destPos = new Vector3(playerScript.transform.position.x - maxSpeed * Time.deltaTime, playerScript.transform.position.y, playerScript.transform.position.z);
+            Move(destPos, MovingType.MoveTowards, maxSpeed);
             MoveUpdate();
             PlayAnimation("Moving");
         }

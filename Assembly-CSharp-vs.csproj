@@ -106,6 +106,7 @@
      <Compile Include="Assets\sources\Actor\MovableActor.cs" />
      <Compile Include="Assets\sources\Actor\PhysicableActor.cs" />
      <Compile Include="Assets\sources\Actor\ScriptableActor.cs" />
+     <Compile Include="Assets\sources\AlliesScripts\DogScripts.cs" />
      <Compile Include="Assets\sources\BackgroundMovementsObject.cs" />
      <Compile Include="Assets\sources\CutSceneSystem.cs" />
      <Compile Include="Assets\sources\DialogSystem\DialogSystem.cs" />

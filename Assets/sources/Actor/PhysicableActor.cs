@@ -40,4 +40,12 @@ public abstract class PhysicableActor : MovableActor, IPhysicableActor
     {
         rigidBody = GetComponent<Rigidbody2D>();
     }
+
+    public Direction GetDirection
+    {
+        get
+        {
+            return direction;
+        }
+    }
 }
