@@ -45,7 +45,10 @@ public class PlayerScript : PhysicableActor
 
     void Update()
     {
-        BaseLogic();
+        if (!DialogSystem.GetDialogSystem().GetSetDialogStart)
+        {
+            BaseLogic();
+        }
     }
 
     void BaseLogic()

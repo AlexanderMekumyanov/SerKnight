@@ -12,6 +12,7 @@ public class DialogSystem
     static DialogSystem dialogSystem;
 
     private String XMLFileName;
+    private bool isDialogStarting = false;
 
     public DialogSystem ()
     {
@@ -58,5 +59,18 @@ public class DialogSystem
         reader.Close();
 
         return texts;
+    }
+
+    public bool GetSetDialogStart
+    {
+        get
+        {
+            return isDialogStarting;
+        }
+        set
+        {
+            isDialogStarting = value;
+        }
+        
     }
 }

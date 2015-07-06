@@ -70,6 +70,8 @@ public class DialogWindow : ScriptableActor
             showingTimer = 0;
             this.transform.localPosition = new Vector2(this.transform.localPosition.x, destY);
         }
+
+        DialogSystem.GetDialogSystem().GetSetDialogStart = true;
     }
 
     private void Hide()
@@ -86,6 +88,8 @@ public class DialogWindow : ScriptableActor
             hidingTimer = 0;
             this.transform.localPosition = new Vector2(this.transform.localPosition.x, startPosY);
         }
+
+        DialogSystem.GetDialogSystem().GetSetDialogStart = false;
     }
 
     public void NextDialog()
