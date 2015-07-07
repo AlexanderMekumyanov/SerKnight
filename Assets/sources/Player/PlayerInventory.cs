@@ -30,18 +30,12 @@ public class PlayerInventory
 
     public void AddNewItem(string id)
     {
-        if (!IsItem(id))
-        {
-            items.Add(id, true);
-        }
+        items[id] = true;
     }
 
     public void AddNewWeapon(string name, GameObject weapon)
     {
-        if (!IsItem(name))
-        {
-            weapons.Add(name, weapon);
-        }
+        weapons[name] =  weapon;
     }
 
     public void EquiptWeapon(string name)

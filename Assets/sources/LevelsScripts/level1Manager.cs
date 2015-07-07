@@ -47,7 +47,6 @@ public class level1Manager : ScriptableActor
 
     public void NextLevel()
     {
-        //Application.LoadLevel("2_level");
-        ScriptSystem.GetInstance().SetScriptCommand(GameObject.Find("DialogWindow"), "ShowDialog", new string[1] { "DIALOG_5" });
+        Application.LoadLevel("2_level");
     }
 }
