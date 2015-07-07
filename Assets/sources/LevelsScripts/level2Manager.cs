@@ -3,9 +3,15 @@ using System.Collections;
 
 public class level2Manager : ScriptableActor 
 {
+    PlayerScript player;
+
 	void Start () 
     {
-	
+        player = GameObject.Find("GameManager").GetComponent<GameManager>().Player;
+
+        player.Equipt("ArmoredTrousersEquipt");
+        player.Equipt("ArmoredJacketEquipt");
+        player.AddNewWeapon("Axe");
 	}
 
 	void Update () 
@@ -41,6 +47,7 @@ public class level2Manager : ScriptableActor
 
     public void NextLevel()
     {
-        Application.LoadLevel("3_level");
+        ScriptSystem.GetInstance().SetScriptCommand(GameObject.Find("DialogWindow"), "ShowDialog", new string[1] { "DIALOG_5" });
+        //Application.LoadLevel("3_level");
     }
 }

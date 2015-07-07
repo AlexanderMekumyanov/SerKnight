@@ -7,6 +7,8 @@ using System.Xml;
 using System.IO;
 using System.Xml.Serialization;
 
+using UnityEngine;
+
 public class DialogSystem
 {
     static DialogSystem dialogSystem;
@@ -16,7 +18,7 @@ public class DialogSystem
 
     public DialogSystem ()
     {
-        XMLFileName = "Assets/resources/files/text.xml";
+        XMLFileName = Application.streamingAssetsPath + "/files/text.xml";
     }
 
     public static DialogSystem GetDialogSystem()

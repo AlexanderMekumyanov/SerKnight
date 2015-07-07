@@ -7,6 +7,7 @@ public class level1Manager : ScriptableActor
     private bool bHaveAxe = false;
     private bool bNextLevel = false;
     private SpecSpace nextLevel;
+    private GameObject inHouseDoor;
 
     void Start () 
     {
@@ -17,7 +18,8 @@ public class level1Manager : ScriptableActor
 
     void InitLevel()
     {
-        GameObject.Find("InHouseDoor").GetComponent<Collider2D>().enabled = false;
+        inHouseDoor = GameObject.Find("InHouseDoor");
+        inHouseDoor.SetActive(false);
     }
 
 	void Update () 
@@ -26,7 +28,7 @@ public class level1Manager : ScriptableActor
         {
             bDressingClothes = true;
             ScriptSystem.GetInstance().SetScriptCommand(GameObject.Find("DialogWindow"), "ShowDialog", new string[1] { "DIALOG_2" });
-            GameObject.Find("InHouseDoor").GetComponent<Collider2D>().enabled = true;
+            inHouseDoor.SetActive(true);
         }
 
         if (bDressingClothes && !bHaveAxe && PlayerInventory.GetPlayerInventory().IsItem("Axe"))
@@ -45,6 +47,7 @@ public class level1Manager : ScriptableActor
 
     public void NextLevel()
     {
-        Application.LoadLevel("2_level");
+        //Application.LoadLevel("2_level");
+        ScriptSystem.GetInstance().SetScriptCommand(GameObject.Find("DialogWindow"), "ShowDialog", new string[1] { "DIALOG_5" });
     }
 }

@@ -127,7 +127,7 @@
      <Compile Include="Assets\sources\ScriptSystem\SpecSpace.cs" />
      <Compile Include="Assets\sources\WeaponScripts\AxeWeaponScript.cs" />
      <None Include="Assets\engine\SpritesAndBones\license-attributions.txt" />
-     <None Include="Assets\Resources\files\text.xml" />
+     <None Include="Assets\StreamingAssets\files\text.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

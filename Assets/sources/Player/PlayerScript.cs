@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-using UnityEditor;
-
 public class PlayerScript : PhysicableActor
 {
     private Skeleton    skeleton;
@@ -14,14 +12,19 @@ public class PlayerScript : PhysicableActor
 
     void Start()
     {
-        InitPhysics();
         
-        direction  = Direction.RIGHT;
+    }
 
-        ArmoredJacket   = GameObject.Find("ArmoredJacket");
+    void Awake()
+    {
+        InitPhysics();
+
+        direction = Direction.RIGHT;
+
+        ArmoredJacket = GameObject.Find("ArmoredJacket");
         ArmoredTrousers = GameObject.Find("ArmoredTrousers");
         ArmoredTrousers.GetComponent<Renderer>().enabled = false;
-        ArmoredJacket.GetComponent<Renderer>().enabled   = false;
+        ArmoredJacket.GetComponent<Renderer>().enabled = false;
         InitAnimations();
 
         skeleton = gameObject.GetComponentInChildren<Skeleton>();
@@ -48,6 +51,12 @@ public class PlayerScript : PhysicableActor
         if (!DialogSystem.GetDialogSystem().GetSetDialogStart)
         {
             BaseLogic();
+        }
+        else
+        {
+            StopAllAnimation();
+            curSpeed = 0.0f;
+            rigidBody.velocity = new Vector2(0.0f, 0.0f);
         }
     }
 
