@@ -10,6 +10,8 @@ public abstract class AnimatibleActor : ScriptableActor, IAnimationActor
 
     public virtual void InitAnimations()
     {
+        Animations = new List<string>();
+        myAnimator = gameObject.GetComponent<Animator>();
     }
 
     public virtual void PlayAnimation(string animationName)

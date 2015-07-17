@@ -2,12 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SpiderScript : PhysicableActor
+public class SpiderScript : BaseAIScript
 {
-    public PlayerScript playerScript;
     public float attackJumpDistance;
 
-    private bool start = false;
+    private bool start = true;
     private bool Attacking = false;
 
     public float preAttackTime;
@@ -26,8 +25,7 @@ public class SpiderScript : PhysicableActor
 
     public override void InitAnimations()
     {
-        myAnimator = gameObject.GetComponent<Animator>();
-        Animations = new List<string>();
+        base.InitAnimations();
         Animations.Add("Attack");
         Animations.Add("Moving");
     }
@@ -67,24 +65,6 @@ public class SpiderScript : PhysicableActor
             rigidBody.AddForce(new Vector2(jumpForce, jumpForce));
         }
     }
-
-    void MovingToPlayer()
-    {
-        float deltaX = playerScript.transform.position.x - this.transform.position.x;
-        if (Mathf.Abs(deltaX) < attackJumpDistance)
-        {
-            Attacking = true;
-            preAttackTimer = preAttackTime;
-            StopAnimation("Moving");
-        }
-        else
-        {
-            Vector3 destPos = new Vector3(playerScript.transform.position.x - maxSpeed * Time.deltaTime, playerScript.transform.position.y, playerScript.transform.position.z);
-            Move(destPos, MovingType.MoveTowards, maxSpeed);
-            MoveUpdate();
-            PlayAnimation("Moving");
-        }
-    }
 	
 	void Update () 
     {
@@ -96,7 +76,11 @@ public class SpiderScript : PhysicableActor
         {
             if (!Attacking)
             {
-                MovingToPlayer();
+                if (MovingToPlayer(attackJumpDistance, "Moving"))
+                {
+                    Attacking = true;
+                    preAttackTimer = preAttackTime;
+                }
             }
             else
             {

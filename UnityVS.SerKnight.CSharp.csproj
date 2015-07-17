@@ -116,6 +116,8 @@
     <Compile Include="Assets\sources\Actor\ScriptableActor.cs" />
     <Compile Include="Assets\sources\AlliesScripts\DogScripts.cs" />
     <Compile Include="Assets\sources\BackgroundMovementsObject.cs" />
+    <Compile Include="Assets\sources\BaseAIScript.cs" />
+    <Compile Include="Assets\sources\Bosses\SpiderBoss.cs" />
     <Compile Include="Assets\sources\CutSceneSystem.cs" />
     <Compile Include="Assets\sources\DialogSystem\DialogSystem.cs" />
     <Compile Include="Assets\sources\DialogSystem\DialogWindow.cs" />

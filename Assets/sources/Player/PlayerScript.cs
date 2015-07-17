@@ -34,8 +34,8 @@ public class PlayerScript : PhysicableActor
 
     public override void InitAnimations()
     {
-        myAnimator = gameObject.GetComponent<Animator>();
-        Animations = new List<string>();
+        base.InitAnimations();
+
         Animations.Add("Yeah");
         Animations.Add("Walk");
         Animations.Add("Attack");
