@@ -9,12 +9,7 @@ public class SpiderScript : BaseAIScript
     private bool start = true;
     private bool Attacking = false;
 
-    public float preAttackTime;
-    private float preAttackTimer;
-
-    public int health;
-
-    private bool prevGrounded = true;
+    public int health = 3;
 
 	void Start () 
     {
@@ -39,22 +34,11 @@ public class SpiderScript : BaseAIScript
     {
         PhysicsUpdate();
 
-        if (grounded && Attacking)
-        {
-            Attacking = false;
-            StopAnimation("Attack");
-        }
-        prevGrounded = grounded;
-    }
-
-    void AttackUpdate()
-    {
-        PlayAnimation("Attack");
+        myAnimator.SetBool("Grounded", grounded);
     }
 
     public void Attack()
     {
-        preAttackTimer = preAttackTime;
         float deltaX = playerScript.transform.position.x - this.transform.position.x;
         if (deltaX < 0)
         {
@@ -78,14 +62,14 @@ public class SpiderScript : BaseAIScript
             {
                 if (MovingToPlayer(attackJumpDistance, "Moving"))
                 {
+                    myAnimator.SetTrigger("Attack");
                     Attacking = true;
-                    preAttackTimer = preAttackTime;
                 }
             }
-            else
-            {
-                AttackUpdate();
-            }
+        }
+        if (myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+        {
+            Attacking = false;
         }
     }
 
