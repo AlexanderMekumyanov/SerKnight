@@ -6,9 +6,17 @@ public class PlayerScript : PhysicableActor
 {
     private Skeleton    skeleton;
 
-    private GameObject  ArmoredJacket;
-    private GameObject  ArmoredTrousers;
-    private GameObject  weapon;
+    public GameObject RightHandArmor;
+    public GameObject LeftHandArmor;
+    public GameObject RightLegArmor;
+    public GameObject LeftLegArmor;
+    public GameObject BodyArmor;
+    public GameObject HeadArmor;
+
+    private GameObject weapon;
+
+    public float Health = 3;
+    public float defence = 1; 
 
     void Start()
     {
@@ -21,10 +29,6 @@ public class PlayerScript : PhysicableActor
 
         direction = Direction.RIGHT;
 
-        ArmoredJacket = GameObject.Find("ArmoredJacket");
-        ArmoredTrousers = GameObject.Find("ArmoredTrousers");
-        ArmoredTrousers.GetComponent<Renderer>().enabled = false;
-        ArmoredJacket.GetComponent<Renderer>().enabled = false;
         InitAnimations();
 
         skeleton = gameObject.GetComponentInChildren<Skeleton>();
@@ -115,13 +119,11 @@ public class PlayerScript : PhysicableActor
         {
             case "ArmoredJacketEquipt":
             {
-                ArmoredJacket.GetComponent<Renderer>().enabled = true;
                 PlayerInventory.GetPlayerInventory().AddNewItem("Jacket");
                 break;
             }
             case "ArmoredTrousersEquipt":
             {
-                ArmoredTrousers.GetComponent<Renderer>().enabled = true;
                 PlayerInventory.GetPlayerInventory().AddNewItem("Trousers");
                 break;
             }
@@ -171,5 +173,37 @@ public class PlayerScript : PhysicableActor
 
         PlayerInventory.GetPlayerInventory().AddNewWeapon(newWeapon.name, newWeapon);
         WeaponEquipt(newWeapon.name);
+    }
+
+    public void AddNewArmor(string armorName)
+    {
+        GameObject newArmor = (GameObject)Instantiate(Resources.Load("prefabs/armor/" + armorName) as GameObject, new Vector3(0, 0, 0), Quaternion.identity);
+        ArmorScript armorScript = newArmor.GetComponent<ArmorScript>();
+
+        switch (armorScript.armorType)
+        {
+            case ArmorType.Body:
+            {
+                BodyArmor.GetComponent<SpriteRenderer>().sprite = armorScript.sprites[0];
+                break;
+            }
+            case ArmorType.Legs:
+            {
+                RightLegArmor.GetComponent<SpriteRenderer>().sprite = armorScript.sprites[0];
+                LeftLegArmor.GetComponent<SpriteRenderer>().sprite = armorScript.sprites[1];
+                break;
+            }
+            case ArmorType.Hands:
+            {
+                RightHandArmor.GetComponent<SpriteRenderer>().sprite = armorScript.sprites[0];
+                LeftHandArmor.GetComponent<SpriteRenderer>().sprite = armorScript.sprites[1];
+                break;
+            }
+            case ArmorType.Head:
+            {
+                HeadArmor.GetComponent<SpriteRenderer>().sprite = armorScript.sprites[0];
+                break;
+            }
+        }
     }
 }

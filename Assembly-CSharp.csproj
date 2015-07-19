@@ -107,6 +107,7 @@
      <Compile Include="Assets\sources\Actor\PhysicableActor.cs" />
      <Compile Include="Assets\sources\Actor\ScriptableActor.cs" />
      <Compile Include="Assets\sources\AlliesScripts\DogScripts.cs" />
+     <Compile Include="Assets\sources\ArmorScript.cs" />
      <Compile Include="Assets\sources\BackgroundMovementsObject.cs" />
      <Compile Include="Assets\sources\BaseAIScript.cs" />
      <Compile Include="Assets\sources\Bosses\SpiderBoss.cs" />

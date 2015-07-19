@@ -111,10 +111,14 @@
     <Compile Include="Assets\sources\Actor\Interfaces\IMovableActor.cs" />
     <Compile Include="Assets\sources\Actor\Interfaces\IPhysicableActor.cs" />
     <Compile Include="Assets\sources\Actor\Interfaces\IScriptableActor.cs" />
+    <Compile Include="Assets\sources\Actor\LevelsScripts\level1Manager.cs" />
+    <Compile Include="Assets\sources\Actor\LevelsScripts\level2Manager.cs" />
+    <Compile Include="Assets\sources\Actor\LevelsScripts\level3Manager.cs" />
     <Compile Include="Assets\sources\Actor\MovableActor.cs" />
     <Compile Include="Assets\sources\Actor\PhysicableActor.cs" />
     <Compile Include="Assets\sources\Actor\ScriptableActor.cs" />
     <Compile Include="Assets\sources\AlliesScripts\DogScripts.cs" />
+    <Compile Include="Assets\sources\ArmorScript.cs" />
     <Compile Include="Assets\sources\BackgroundMovementsObject.cs" />
     <Compile Include="Assets\sources\BaseAIScript.cs" />
     <Compile Include="Assets\sources\Bosses\SpiderBoss.cs" />
@@ -125,9 +129,6 @@
     <Compile Include="Assets\sources\GameManager.cs" />
     <Compile Include="Assets\sources\GameSystem.cs" />
     <Compile Include="Assets\sources\InwardDoor.cs" />
-    <Compile Include="Assets\sources\LevelsScripts\level1Manager.cs" />
-    <Compile Include="Assets\sources\LevelsScripts\level2Manager.cs" />
-    <Compile Include="Assets\sources\LevelsScripts\level3Manager.cs" />
     <Compile Include="Assets\sources\MainCameraScript.cs" />
     <Compile Include="Assets\sources\Player\PlayerInventory.cs" />
     <Compile Include="Assets\sources\Player\PlayerScript.cs" />
