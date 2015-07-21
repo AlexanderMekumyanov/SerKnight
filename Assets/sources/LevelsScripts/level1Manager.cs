@@ -24,7 +24,7 @@ public class level1Manager : ScriptableActor
 
 	void Update () 
     {
-        if (!bDressingClothes && PlayerInventory.GetPlayerInventory().IsItem("Jacket") && PlayerInventory.GetPlayerInventory().IsItem("Trousers"))
+        if (!bDressingClothes && PlayerInventory.GetPlayerInventory().IsItem("ArmoredJacket") && PlayerInventory.GetPlayerInventory().IsItem("ArmoredTrousers"))
         {
             bDressingClothes = true;
             ScriptSystem.GetInstance().SetScriptCommand(GameObject.Find("DialogWindow"), "ShowDialog", new string[1] { "DIALOG_2" });

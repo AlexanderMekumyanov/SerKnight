@@ -125,6 +125,7 @@
     <Compile Include="Assets\sources\GameManager.cs" />
     <Compile Include="Assets\sources\GameSystem.cs" />
     <Compile Include="Assets\sources\InwardDoor.cs" />
+    <Compile Include="Assets\sources\LevelsScripts\ForAnimationScript.cs" />
     <Compile Include="Assets\sources\LevelsScripts\level1Manager.cs" />
     <Compile Include="Assets\sources\LevelsScripts\level2Manager.cs" />
     <Compile Include="Assets\sources\LevelsScripts\level3Manager.cs" />
@@ -132,9 +133,11 @@
     <Compile Include="Assets\sources\Player\PlayerInventory.cs" />
     <Compile Include="Assets\sources\Player\PlayerScript.cs" />
     <Compile Include="Assets\sources\Player\weaponBase.cs" />
+    <Compile Include="Assets\sources\QuestSystem\QuestManager.cs" />
     <Compile Include="Assets\sources\ScriptSystem\KeyCondition.cs" />
     <Compile Include="Assets\sources\ScriptSystem\ScriptSystem.cs" />
     <Compile Include="Assets\sources\ScriptSystem\SpecSpace.cs" />
+    <Compile Include="Assets\sources\WeaponScripts\ArmorScript.cs" />
     <Compile Include="Assets\sources\WeaponScripts\AxeWeaponScript.cs" />
   </ItemGroup>
   <ItemGroup>
