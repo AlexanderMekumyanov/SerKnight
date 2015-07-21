@@ -177,6 +177,7 @@ public class PlayerScript : PhysicableActor
 
     public void AddNewArmor(string armorName)
     {
+        PlayerInventory.GetPlayerInventory().AddNewItem(armorName);
         GameObject newArmor = (GameObject)Instantiate(Resources.Load("prefabs/armor/" + armorName) as GameObject, new Vector3(0, 0, 0), Quaternion.identity);
         ArmorScript armorScript = newArmor.GetComponent<ArmorScript>();
 
