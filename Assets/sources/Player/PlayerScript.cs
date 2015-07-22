@@ -109,8 +109,26 @@ public class PlayerScript : PhysicableActor
 
     void Flip()
     {
-        skeleton.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
-        weapon.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
+        //
+        //weapon.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
+
+        //this.transform.Rotate(new Vector3(0, 180, 0));
+
+        //Vector3 theScale = transform.localScale;
+        //theScale.x *= -1;
+        //transform.localScale = theScale;
+
+        //this.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
+        if (direction == Direction.RIGHT)
+        {
+            this.transform.rotation = new Quaternion(0, 180, 0, this.transform.rotation.w);
+        }
+        else
+        {
+            this.transform.rotation = new Quaternion(0, 0, 0, this.transform.rotation.w);
+        }
+        weapon.transform.localPosition = new Vector3(weapon.transform.localPosition.x, weapon.transform.localPosition.y, weapon.transform.localPosition.z * -1);
+        //this.transform.rotation = Quaternion.Inverse(this.transform.rotation);
     }
 
     public void Equipt(string itemName)
@@ -157,8 +175,9 @@ public class PlayerScript : PhysicableActor
 
         WeaponBase myWeapon = PlayerInventory.GetPlayerInventory().GetCurrentWeapon().GetComponent<WeaponBase>();
         myWeapon.transform.SetParent(weapon.transform);
-        myWeapon.transform.localPosition = myWeapon.weaponPosition;
+        myWeapon.transform.localPosition = new Vector3(0, 0, 0);
         myWeapon.transform.Rotate(myWeapon.weaponRotation);
+        weapon.transform.localPosition = myWeapon.weaponPosition;
 
         AnimatorOverrideController overrideController = new AnimatorOverrideController();
         overrideController.runtimeAnimatorController = myAnimator.runtimeAnimatorController;

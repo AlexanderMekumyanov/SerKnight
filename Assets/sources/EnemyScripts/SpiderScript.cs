@@ -6,7 +6,7 @@ public class SpiderScript : BaseAIScript
 {
     public float attackJumpDistance;
 
-    private bool start = true;
+    private bool start = false;
     private bool Attacking = false;
 
     public int health = 3;
@@ -56,9 +56,9 @@ public class SpiderScript : BaseAIScript
         {
             return;
         }
-        if (grounded)
+        if (!Attacking)
         {
-            if (!Attacking)
+            if (grounded)
             {
                 if (MovingToPlayer(attackJumpDistance, "Moving"))
                 {
@@ -66,6 +66,10 @@ public class SpiderScript : BaseAIScript
                     Attacking = true;
                 }
             }
+        }
+        else
+        {
+            Attacking = false;
         }
         if (myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
         {
@@ -75,6 +79,7 @@ public class SpiderScript : BaseAIScript
 
     public void Damaging()
     {
+        myAnimator.SetTrigger("Damaging");
         if (--health <= 0)
         {
             Destroy(gameObject);

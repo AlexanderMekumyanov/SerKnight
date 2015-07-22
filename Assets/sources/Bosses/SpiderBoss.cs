@@ -6,6 +6,8 @@ public class SpiderBoss : BaseAIScript
 {
     public float canAttackDistance;
 
+    public bool isWake = false;
+
     void Start () 
     {
         states = new Dictionary<string, bool>();
@@ -23,14 +25,20 @@ public class SpiderBoss : BaseAIScript
 
     void Update () 
     {
+        if (!isWake)
+        {
+            return;
+        }
+
+        if (GetCurrState("Idle"))
+        {
+            PlayAnimation("Idle");
+        }
+
         if (GetCurrState("AttackEnd"))
         {
             PlayAnimation("AttackEnd");
             SetCurrState("AttackEnd", false);
-        }
-        if (GetCurrState("Idle"))
-        {
-            PlayAnimation("Idle");
         }
         else if (!GetCurrState("crying"))
         {
@@ -53,12 +61,21 @@ public class SpiderBoss : BaseAIScript
 
     void Attacking()
     {
-        PlayAnimation("Attack");
+        myAnimator.SetTrigger("Attack");
     }
 
     void AttackEnd()
     {
     }
 
+    public void WakePlease()
+    {
+        isWake = true;
+        GetComponent<Rigidbody2D>().isKinematic = false;
+    }
 
+    public void SleepPlease()
+    {
+        isWake = false;
+    }
 }

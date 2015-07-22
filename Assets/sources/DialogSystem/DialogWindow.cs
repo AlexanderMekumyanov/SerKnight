@@ -46,6 +46,11 @@ public class DialogWindow : ScriptableActor
         {
             Hide();
         }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            NextDialog();
+        }
 	}
 
     public void ShowDialog(string textID)
@@ -61,7 +66,7 @@ public class DialogWindow : ScriptableActor
         showingTimer += Time.deltaTime;
         if (showingTimer < showingTime)
         {
-            float p                 = showingTimer / showingTime;
+            float p = showingTimer / showingTime;
             this.transform.localPosition = new Vector3(this.transform.localPosition.x, destY * p + startPosY * (1.0f - p), 0.0f);
         }
         else
@@ -70,7 +75,6 @@ public class DialogWindow : ScriptableActor
             showingTimer = 0;
             this.transform.localPosition = new Vector2(this.transform.localPosition.x, destY);
         }
-
         DialogSystem.GetDialogSystem().GetSetDialogStart = true;
     }
 
@@ -79,7 +83,7 @@ public class DialogWindow : ScriptableActor
         hidingTimer += Time.deltaTime;
         if (hidingTimer < hidingTime)
         {
-            float p                 = hidingTimer / hidingTime;
+            float p = hidingTimer / hidingTime;
             this.transform.localPosition = new Vector3(this.transform.localPosition.x, startPosY * p + destY * (1.0f - p), 0.0f);
         }
         else
@@ -88,18 +92,20 @@ public class DialogWindow : ScriptableActor
             hidingTimer = 0;
             this.transform.localPosition = new Vector2(this.transform.localPosition.x, startPosY);
         }
-
         DialogSystem.GetDialogSystem().GetSetDialogStart = false;
     }
 
     public void NextDialog()
     {
-        currText++;
-        if (currText > dialogTexts.Count - 1)
+        if (DialogSystem.GetDialogSystem().GetSetDialogStart == true)
         {
-            hiding = true;
-            return;
+            currText++;
+            if (currText > dialogTexts.Count - 1)
+            {
+                hiding = true;
+                return;
+            }
+            uiText.text = dialogTexts[currText];
         }
-        uiText.text = dialogTexts[currText];
     }
 }
