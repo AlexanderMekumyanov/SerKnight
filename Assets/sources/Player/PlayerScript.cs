@@ -121,11 +121,11 @@ public class PlayerScript : PhysicableActor
         //this.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
         if (direction == Direction.RIGHT)
         {
-            this.transform.rotation = new Quaternion(0, 180, 0, this.transform.rotation.w);
+            this.transform.rotation = new Quaternion(0, 0, 0, this.transform.rotation.w);
         }
         else
         {
-            this.transform.rotation = new Quaternion(0, 0, 0, this.transform.rotation.w);
+            this.transform.rotation = new Quaternion(0, 180, 0, this.transform.rotation.w);
         }
         weapon.transform.localPosition = new Vector3(weapon.transform.localPosition.x, weapon.transform.localPosition.y, weapon.transform.localPosition.z * -1);
         //this.transform.rotation = Quaternion.Inverse(this.transform.rotation);

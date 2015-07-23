@@ -21,8 +21,8 @@ public class MainCameraScript : MonoBehaviour
         UpdateInwardAnimation();
         if (target)
         {
-            Vector3 point = Camera.main.WorldToViewportPoint(new Vector3(target.position.x, target.position.y + 0.75f, target.position.z));
-            Vector3 delta = new Vector3(target.position.x, target.position.y + 0.75f, target.position.z) - Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
+            Vector3 point = Camera.main.WorldToViewportPoint(new Vector3(target.position.x, target.position.y + 1.75f, target.position.z));
+            Vector3 delta = new Vector3(target.position.x, target.position.y + 1.75f, target.position.z) - Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
             Vector3 destination = transform.position + delta;
 
             transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
