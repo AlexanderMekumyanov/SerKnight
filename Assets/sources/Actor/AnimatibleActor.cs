@@ -7,11 +7,13 @@ public abstract class AnimatibleActor : ScriptableActor, IAnimationActor
 {
     public Animator myAnimator { get; set; }
     public List<string> Animations { get; set; }
+    public AudioSource mAudioSource { get; set; }
 
     public virtual void InitAnimations()
     {
         Animations = new List<string>();
         myAnimator = gameObject.GetComponent<Animator>();
+        mAudioSource = gameObject.GetComponent<AudioSource>();
     }
 
     public virtual void PlayAnimation(string animationName)

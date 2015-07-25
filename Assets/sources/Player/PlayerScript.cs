@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,6 +13,9 @@ public class PlayerScript : PhysicableActor
     public GameObject LeftLegArmor;
     public GameObject BodyArmor;
     public GameObject HeadArmor;
+
+    public AudioClip jumpSound;
+    public AudioClip walkSound;
 
     private GameObject weapon;
 
@@ -27,7 +31,7 @@ public class PlayerScript : PhysicableActor
     {
         InitPhysics();
 
-        direction = Direction.RIGHT;
+        direction = Direction.LEFT;
 
         InitAnimations();
 
@@ -69,6 +73,7 @@ public class PlayerScript : PhysicableActor
         if (grounded && Input.GetKeyDown(KeyCode.Space))
         {
             rigidBody.AddForce(new Vector2(0f, jumpForce));
+            mAudioSource.PlayOneShot(jumpSound);
         }
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -88,6 +93,9 @@ public class PlayerScript : PhysicableActor
                 Flip();
                 direction = Direction.RIGHT;
             }
+            mAudioSource.clip = walkSound;
+            mAudioSource.loop = true;
+            mAudioSource.Play();
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -98,11 +106,19 @@ public class PlayerScript : PhysicableActor
                 Flip();
                 direction = Direction.LEFT;
             }
+            mAudioSource.clip = walkSound;
+            mAudioSource.loop = true;
+            mAudioSource.Play();
         }
         else
         {
             StopAllAnimation();
             curSpeed = 0.0f;
+            if (mAudioSource.clip == walkSound)
+            {
+                mAudioSource.loop = false;
+                mAudioSource.clip = null;
+            }
         }
         rigidBody.velocity = new Vector2(curSpeed, rigidBody.velocity.y);
     }

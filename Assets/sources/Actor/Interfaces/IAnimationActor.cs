@@ -8,6 +8,8 @@ interface IAnimationActor
 
     List<string> Animations{ get; set;}
 
+    AudioSource mAudioSource { get; set; }
+
     void InitAnimations();
     void PlayAnimation(string animationName);
     void StopAnimation(string animationName);
