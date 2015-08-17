@@ -6,7 +6,7 @@ public class SpiderScript : BaseAIScript
 {
     public float attackJumpDistance;
 
-    private bool start = false;
+    private bool start = true;
     private bool Attacking = false;
 
     public int health = 3;
@@ -30,13 +30,6 @@ public class SpiderScript : BaseAIScript
         start = true;    
     }
 
-    void FixedUpdate()
-    {
-        PhysicsUpdate();
-
-        myAnimator.SetBool("Grounded", grounded);
-    }
-
     public void Attack()
     {
         float deltaX = playerScript.transform.position.x - this.transform.position.x;
@@ -52,28 +45,19 @@ public class SpiderScript : BaseAIScript
 	
 	void Update () 
     {
+        PhysicsUpdate();
+        myAnimator.SetBool("Grounded", grounded);
+
         if (!start)
         {
             return;
         }
-        if (!Attacking)
+        if (grounded)
         {
-            if (grounded)
+            if (MovingToPlayer(attackJumpDistance, "Moving"))
             {
-                if (MovingToPlayer(attackJumpDistance, "Moving"))
-                {
-                    myAnimator.SetTrigger("Attack");
-                    Attacking = true;
-                }
+                myAnimator.SetTrigger("Attack");
             }
-        }
-        else
-        {
-            Attacking = false;
-        }
-        if (myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
-        {
-            Attacking = false;
         }
     }
 

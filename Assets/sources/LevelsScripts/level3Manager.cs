@@ -14,21 +14,23 @@ public class level3Manager : ScriptableActor
 
 	void Start () 
     {
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Alies"));
+        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Alies"));
         GameObject.Find("GameManager").GetComponent<GameManager>().Player.AddNewWeapon("Axe");
+
+        //LetsGo();
 	}
 	
 	void Update () 
     {
-        for (int i = 0; i < spiders.Count; i++)
-        {
-           if (spiders[i] != null)
-           {
-               return;
-           }
-        }
+        //for (int i = 0; i < spiders.Count; i++)
+        //{
+        //   if (spiders[i] != null)
+        //   {
+        //       return;
+        //   }
+        //}
 
-        GoBoss();
+        //GoBoss();
 
     }
 
@@ -38,7 +40,7 @@ public class level3Manager : ScriptableActor
         for (int i = 0; i < spiders.Count; i++)
         {
             spiders[i].WakeUp();
-            spiders[i].gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+           // spiders[i].gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
         }
     }
 
