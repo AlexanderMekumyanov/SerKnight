@@ -9,7 +9,7 @@ public struct ScriptParameter
     public string[] ArrayOfParameter;
 }
 
-public abstract class ScriptableActor : MonoBehaviour, IScriptableActor
+public abstract class ScriptableActor : Actor, IScriptableActor
 {
     public bool ScriptFlag { get; set; }
     public string ScriptCommand { get; set; }

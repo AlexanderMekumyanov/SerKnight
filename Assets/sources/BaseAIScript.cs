@@ -22,4 +22,8 @@ public class BaseAIScript : PhysicableActor
             return false;
         }
     }
+
+    public virtual void Damaging()
+    {
+    }
 }

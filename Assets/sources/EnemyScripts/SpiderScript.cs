@@ -6,10 +6,9 @@ public class SpiderScript : BaseAIScript
 {
     public float attackJumpDistance;
 
-    private bool start = true;
-    private bool Attacking = false;
-
     public int health = 3;
+
+    private float playerDestDirection;
 
 	void Start () 
     {
@@ -27,13 +26,14 @@ public class SpiderScript : BaseAIScript
 
     public void WakeUp()
     {
-        start = true;    
+        curState = States.FINDING_ENEMY;
     }
 
     public void Attack()
     {
-        float deltaX = playerScript.transform.position.x - this.transform.position.x;
-        if (deltaX < 0)
+       // Debug.Log("---------------ATTACK---------------");
+        SetState(States.ATTACKING);
+        if (playerDestDirection < 0)
         {
             rigidBody.AddForce(new Vector2(-jumpForce, jumpForce));
         }
@@ -45,28 +45,74 @@ public class SpiderScript : BaseAIScript
 	
 	void Update () 
     {
-        PhysicsUpdate();
-        myAnimator.SetBool("Grounded", grounded);
-
-        if (!start)
+        if (curState == States.SLEEP)
         {
             return;
         }
-        if (grounded)
+
+        PhysicsUpdate();
+        myAnimator.SetBool("Grounded", grounded);
+
+        switch (curState)
         {
-            if (MovingToPlayer(attackJumpDistance, "Moving"))
+            case States.SLEEP:
             {
-                myAnimator.SetTrigger("Attack");
+                break;
+            }
+            case States.FINDING_ENEMY:
+            {
+                if (MovingToPlayer(attackJumpDistance, "Moving"))
+                {
+                    curState = States.ATTACK_BEGIN;
+                    playerDestDirection = playerScript.transform.position.x - this.transform.position.x;
+                }
+                break;
+            }
+            case States.ATTACK_BEGIN:
+            {
+                myAnimator.SetTrigger("Attack_begin");
+                break;
+            }
+            case States.IDLE:
+            {
+                myAnimator.SetBool("Idle", true);
+                break;
+            }
+            case States.ATTACK:
+            {
+                Attack();
+                break;
+            }
+            case States.ATTACK_END:
+            {
+                if (grounded)
+                {
+                    curState = States.FINDING_ENEMY;
+                }
+                break;
+            }
+            case States.DEATH:
+            {
+                myAnimator.SetTrigger("Death");
+                break;
+            }
+            case States.DEATH_END:
+            {
+                Destroy(gameObject);
+                break;
             }
         }
+
+        Debug.Log(curState.ToString());
     }
 
-    public void Damaging()
+    public override void Damaging()
     {
+       // Debug.Log("---------------DAMAGING---------------");
         myAnimator.SetTrigger("Damaging");
         if (--health <= 0)
         {
-            Destroy(gameObject);
+            curState = States.DEATH;
         }
         else
         {
@@ -80,5 +126,10 @@ public class SpiderScript : BaseAIScript
                 rigidBody.AddForce(new Vector2(-jumpForce, 0));
             }
         }
+    }
+
+    public void SetState(States newState)
+    {
+        curState = newState;
     }
 }

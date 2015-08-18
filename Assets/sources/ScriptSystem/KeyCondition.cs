@@ -11,7 +11,6 @@ public class KeyCondition : MonoBehaviour
     public bool       isLimited = false;
 
     private Renderer objectRenderer;
-    private bool     active;
 
 	void Start () 
     {
@@ -26,9 +25,8 @@ public class KeyCondition : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (gameObject.active)
+        if (gameObject.activeSelf)
         {
-            
             if (other.gameObject.tag == objectTag)
             {
                 objectRenderer.enabled = true;
