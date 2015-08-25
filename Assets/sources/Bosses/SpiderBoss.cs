@@ -47,10 +47,10 @@ public class SpiderBoss : BaseAIScript
         }
         else
         {
-            if (MovingToPlayer(canAttackDistance, "Moving"))
-            {
-                Attacking();
-            }
+            //if (MovingToPlayer(canAttackDistance, "Moving"))
+            //{
+            //    Attacking();
+            //}
         }
 	}
 

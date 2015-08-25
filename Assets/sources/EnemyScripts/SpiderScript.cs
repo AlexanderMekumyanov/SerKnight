@@ -61,10 +61,16 @@ public class SpiderScript : BaseAIScript
             }
             case States.FINDING_ENEMY:
             {
-                if (MovingToPlayer(attackJumpDistance, "Moving"))
+                if (IsWithinReach(playerScript.gameObject, attackJumpDistance))
                 {
-                    curState = States.ATTACK_BEGIN;
+                    SetState(States.ATTACK_BEGIN);
                     playerDestDirection = playerScript.transform.position.x - this.transform.position.x;
+                    myAnimator.SetBool("Moving", false);
+                }
+                else
+                {
+                    MovingTo(playerScript.gameObject);
+                    myAnimator.SetBool("Moving", true);
                 }
                 break;
             }
@@ -75,7 +81,6 @@ public class SpiderScript : BaseAIScript
             }
             case States.IDLE:
             {
-                myAnimator.SetBool("Idle", true);
                 break;
             }
             case States.ATTACK:
@@ -83,39 +88,47 @@ public class SpiderScript : BaseAIScript
                 Attack();
                 break;
             }
+            case States.ATTACKING:
+            {
+                break;
+            }
             case States.ATTACK_END:
             {
                 if (grounded)
                 {
-                    curState = States.FINDING_ENEMY;
+                    SetState(States.FINDING_ENEMY);
                 }
                 break;
             }
             case States.DEATH:
             {
-                myAnimator.SetTrigger("Death");
                 break;
             }
             case States.DEATH_END:
             {
                 Destroy(gameObject);
+                SetState(States.SLEEP);
+                break;
+            }
+            case States.DAMAGING:
+            {
                 break;
             }
         }
-
-        Debug.Log(curState.ToString());
     }
 
     public override void Damaging()
     {
        // Debug.Log("---------------DAMAGING---------------");
-        myAnimator.SetTrigger("Damaging");
         if (--health <= 0)
         {
-            curState = States.DEATH;
+            myAnimator.SetTrigger("Death");
+            SetState(States.DEATH);
         }
         else
         {
+            myAnimator.SetTrigger("Damaging");
+            SetState(States.DAMAGING);
             float deltaX = playerScript.transform.position.x - this.transform.position.x;
             if (deltaX < 0)
             {
@@ -131,5 +144,6 @@ public class SpiderScript : BaseAIScript
     public void SetState(States newState)
     {
         curState = newState;
+        Debug.Log(curState.ToString());
     }
 }

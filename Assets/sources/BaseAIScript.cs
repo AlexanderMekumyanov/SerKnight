@@ -5,22 +5,24 @@ public class BaseAIScript : PhysicableActor
 {
     public PlayerScript playerScript;
 
-    protected bool MovingToPlayer(float betweenDistance, string MovingAnimationName)
+    protected void MovingTo(GameObject target)
     {
-        float deltaX = playerScript.transform.position.x - this.transform.position.x;
-        if (Mathf.Abs(deltaX) < betweenDistance)
+        if (grounded)
         {
-            StopAnimation(MovingAnimationName);
-            return true;
-        }
-        else
-        {
-            Vector3 destPos = new Vector3(playerScript.gameObject.transform.position.x - maxSpeed * Time.deltaTime, playerScript.transform.position.y, playerScript.transform.position.z);
+            Vector3 destPos = new Vector3(target.transform.position.x - maxSpeed * Time.deltaTime, target.transform.position.y, target.transform.position.z);
             Move(destPos, MovingType.MoveTowards, maxSpeed);
             MoveUpdate();
-            PlayAnimation(MovingAnimationName);
-            return false;
         }
+    }
+
+    protected bool IsWithinReach(GameObject target, float rangeDistance)
+    {
+        float deltaX = target.transform.position.x - this.transform.position.x;
+        if (Mathf.Abs(deltaX) < rangeDistance)
+        {
+            return true;
+        }
+        return false;
     }
 
     public virtual void Damaging()

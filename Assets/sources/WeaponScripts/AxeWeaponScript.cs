@@ -16,6 +16,7 @@ public class AxeWeaponScript : WeaponBase
         {
             other.gameObject.GetComponent<SpiderScript>().Damaging();
             playerScript.CannotAttack();
+            Debug.Log("!!!!!!!!!!!!SPIDER_DAMAGE!!!!!!!!!!!!");
         }
     }
 }

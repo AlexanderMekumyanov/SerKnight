@@ -37,6 +37,8 @@ public class PlayerScript : PhysicableActor
         skeleton = gameObject.GetComponentInChildren<Skeleton>();
 
         weapon = this.transform.Find("Weapon").gameObject;
+
+        isAttacking = false;
     }
 
     public override void InitAnimations()

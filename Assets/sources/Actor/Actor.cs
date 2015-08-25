@@ -15,7 +15,8 @@ public enum States
     ATTACKING,
     ATTACK_END,
     DEATH,
-    DEATH_END
+    DEATH_END,
+    DAMAGING
 }
 
 public abstract class Actor : MonoBehaviour//, IAnimationActor, IMovableActor, IScriptableActor
