@@ -16,9 +16,79 @@ public class MainCameraScript : MonoBehaviour
         startCameraSize = myCamera.orthographicSize;
     }
 
-	void Update () 
+    private bool bZooming = false;
+    private float zoomingDestCameraSize;
+    private float zoomingDelay;
+    public void StartZoom(float destCameraSize, float delay)
     {
-        UpdateInwardAnimation();
+        bZooming = true;
+        this.zoomingDelay = delay;
+        this.zoomingDestCameraSize = destCameraSize;
+    }
+
+    private bool ZoomUpdate(float destCameraSize, float delay)
+    {
+        this.myCamera.orthographicSize = Mathf.Lerp(this.myCamera.orthographicSize, destCameraSize, delay * Time.deltaTime);
+        if (Mathf.Abs(destCameraSize - this.myCamera.orthographicSize) < 0.2f)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    private bool bInwardAnimation = false;
+    private GameObject insideChamber;
+    private GameObject outsideChamber;
+    public void StartInwardAnimation(GameObject insideChamber, GameObject outsideChamber, float destCameraSize, float delay)
+    {
+        this.zoomingDelay = delay;
+        this.zoomingDestCameraSize = destCameraSize;
+        this.insideChamber = insideChamber;
+        this.outsideChamber = outsideChamber;
+        bInwardAnimation = true;
+    }
+
+    private bool bZoom = false;
+    private bool UpdateInwardAnimation()
+    {
+        if (!bZoom)
+        {
+            if (ZoomUpdate(zoomingDestCameraSize, zoomingDelay))
+            {
+                bZoom = true;
+                this.myCamera.orthographicSize = zoomingDestCameraSize;
+                outsideChamber.SetActive(false);
+                insideChamber.SetActive(true);
+            }
+        }
+        else
+        {
+            if (ZoomUpdate(startCameraSize, zoomingDelay))
+            {
+                bZoom = false;
+                this.myCamera.orthographicSize = startCameraSize;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void Update () 
+    {
+        if (bZooming)
+        {
+            if (ZoomUpdate(zoomingDestCameraSize, zoomingDelay))
+            {
+                bZooming = false;
+            }
+        }
+        else if (bInwardAnimation)
+        {
+            if (UpdateInwardAnimation())
+            {
+                bInwardAnimation = false;
+            }
+        }
         if (target)
         {
             Vector3 point = Camera.main.WorldToViewportPoint(new Vector3(target.position.x, target.position.y + 1.75f, target.position.z));
@@ -28,47 +98,4 @@ public class MainCameraScript : MonoBehaviour
             transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
         }
 	}
-
-    private float destCameraSize;
-    private float delay;
-    private bool bInwardAnimation = false;
-    private GameObject insideChamber;
-    private GameObject outsideChamber;
-    public void StartInwardAnimation(GameObject insideChamber, GameObject outsideChamber, float destCameraSize, float delay)
-    {
-        this.delay = delay;
-        this.destCameraSize = destCameraSize;
-        this.insideChamber = insideChamber;
-        this.outsideChamber = outsideChamber;
-        bInwardAnimation = true;
-    }
-
-    private bool bZoom = false;
-    void UpdateInwardAnimation()
-    {
-        if (bInwardAnimation)
-        {
-            if (!bZoom)
-            {
-                this.myCamera.orthographicSize = Mathf.Lerp(this.myCamera.orthographicSize, destCameraSize, delay * Time.deltaTime);
-                if (Mathf.Abs(destCameraSize - this.myCamera.orthographicSize) < 0.2f)
-                {
-                    bZoom = true;
-                    this.myCamera.orthographicSize = destCameraSize;
-                    outsideChamber.SetActive(false);
-                    insideChamber.SetActive(true);
-                }
-            }
-            else
-            {
-                this.myCamera.orthographicSize = Mathf.Lerp(this.myCamera.orthographicSize, startCameraSize, delay * Time.deltaTime);
-                if (Mathf.Abs(startCameraSize - this.myCamera.orthographicSize) < 0.2f)
-                {
-                    bZoom = false;
-                    bInwardAnimation = false;
-                    this.myCamera.orthographicSize = startCameraSize;
-                }
-            }
-        }
-    }
 }

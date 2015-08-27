@@ -117,7 +117,10 @@
     <Compile Include="Assets\sources\AlliesScripts\DogScripts.cs" />
     <Compile Include="Assets\sources\BackgroundMovementsObject.cs" />
     <Compile Include="Assets\sources\BaseAIScript.cs" />
-    <Compile Include="Assets\sources\Bosses\SpiderBoss.cs" />
+    <Compile Include="Assets\sources\Bosses\SpiderBoss\ColiderForAttackScript.cs" />
+    <Compile Include="Assets\sources\Bosses\SpiderBoss\ColliderForDamage.cs" />
+    <Compile Include="Assets\sources\Bosses\SpiderBoss\LegScript.cs" />
+    <Compile Include="Assets\sources\Bosses\SpiderBoss\SpiderBoss.cs" />
     <Compile Include="Assets\sources\CutSceneSystem.cs" />
     <Compile Include="Assets\sources\DialogSystem\DialogSystem.cs" />
     <Compile Include="Assets\sources\DialogSystem\DialogWindow.cs" />

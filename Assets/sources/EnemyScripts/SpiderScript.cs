@@ -6,8 +6,6 @@ public class SpiderScript : BaseAIScript
 {
     public float attackJumpDistance;
 
-    public int health = 3;
-
     private float playerDestDirection;
 
 	void Start () 
@@ -26,7 +24,7 @@ public class SpiderScript : BaseAIScript
 
     public void WakeUp()
     {
-        curState = States.FINDING_ENEMY;
+        SetState(States.FINDING_ENEMY);
     }
 
     public void Attack()
@@ -45,7 +43,7 @@ public class SpiderScript : BaseAIScript
 	
 	void Update () 
     {
-        if (curState == States.SLEEP)
+        if (GetCurrState() == States.SLEEP)
         {
             return;
         }
@@ -53,7 +51,7 @@ public class SpiderScript : BaseAIScript
         PhysicsUpdate();
         myAnimator.SetBool("Grounded", grounded);
 
-        switch (curState)
+        switch (GetCurrState())
         {
             case States.SLEEP:
             {
@@ -139,11 +137,5 @@ public class SpiderScript : BaseAIScript
                 rigidBody.AddForce(new Vector2(-jumpForce, 0));
             }
         }
-    }
-
-    public void SetState(States newState)
-    {
-        curState = newState;
-        Debug.Log(curState.ToString());
     }
 }

@@ -5,18 +5,18 @@ using System.Collections.Generic;
 public class level3Manager : ScriptableActor 
 {
     public DogScripts dog;
-
     public List<SpiderScript> spiders;
-
     public SpiderBoss spiderBoss;
-
     public bool goBoss = false;
+
+    private GameManager gameManager;
 
 	void Start () 
     {
-        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Alies"));
-        GameObject.Find("GameManager").GetComponent<GameManager>().Player.AddNewWeapon("Axe");
-
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("NonCollide"));
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager.Player.AddNewWeapon("Axe");
+        gameManager.GetMainCameraScript.StartZoom(7, 5);
         //LetsGo();
 	}
 	

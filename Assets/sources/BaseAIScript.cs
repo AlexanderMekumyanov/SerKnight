@@ -4,6 +4,7 @@ using System.Collections;
 public class BaseAIScript : PhysicableActor 
 {
     public PlayerScript playerScript;
+    public int health;
 
     protected void MovingTo(GameObject target)
     {

@@ -14,9 +14,9 @@ public class AxeWeaponScript : WeaponBase
     {
         if (other.tag == "Spider" && playerScript.isAttacking)
         {
-            other.gameObject.GetComponent<SpiderScript>().Damaging();
+            other.gameObject.GetComponent<BaseAIScript>().Damaging();
             playerScript.CannotAttack();
-            Debug.Log("!!!!!!!!!!!!SPIDER_DAMAGE!!!!!!!!!!!!");
+            Debug.Log("!!!!!!!!!!!!" + other.gameObject.name + ".DAMAGE!!!!!!!!!!!!");
         }
     }
 }

@@ -22,5 +22,16 @@ public enum States
 public abstract class Actor : MonoBehaviour//, IAnimationActor, IMovableActor, IScriptableActor
 {
     public delegate void Action();
-    protected States curState = States.SLEEP;
+    private States curState = States.SLEEP;
+
+    public void SetState(States newState)
+    {
+        curState = newState;
+        Debug.Log(curState.ToString());
+    }
+
+    public States GetCurrState()
+    {
+        return curState;
+    }
 }
