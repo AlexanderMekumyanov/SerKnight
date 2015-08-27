@@ -10,7 +10,6 @@ public class ForAnimationScript : MonoBehaviour
         GameObject.Find("Player").GetComponent<PlayerScript>().AddNewWeapon(playerWeapon);
 	}
 	
-	// Update is called once per frame
 	void Update () {
 	
 	}

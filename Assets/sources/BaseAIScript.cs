@@ -26,6 +26,38 @@ public class BaseAIScript : PhysicableActor
         return false;
     }
 
+    protected void MovingToPlayerBehind(float playerBehindDistance)
+    {
+        float deltaX = playerScript.transform.position.x - this.transform.position.x;
+
+        if (System.Math.Abs(deltaX) < playerBehindDistance + 2)
+        {
+            if (deltaX > 0)
+            {
+                this.transform.rotation = new Quaternion(this.transform.rotation.x, 0, this.transform.rotation.z, this.transform.rotation.w);
+            }
+            else
+            {
+                this.transform.rotation = new Quaternion(this.transform.rotation.x, 180, this.transform.rotation.z, this.transform.rotation.w);
+            }
+            return;
+        }
+
+        Vector3 destPos;
+
+        if (playerScript.GetDirection == Direction.RIGHT)
+        {
+            destPos = new Vector3(playerScript.transform.position.x - playerBehindDistance - maxSpeed * Time.deltaTime, playerScript.transform.position.y, playerScript.transform.position.z);
+        }
+        else
+        {
+            destPos = new Vector3(playerScript.transform.position.x + playerBehindDistance - maxSpeed * Time.deltaTime, playerScript.transform.position.y, playerScript.transform.position.z);
+        }
+
+        Move(destPos, MovingType.MoveTowards, maxSpeed);
+        MoveUpdate();
+    }
+
     public virtual void Damaging()
     {
     }

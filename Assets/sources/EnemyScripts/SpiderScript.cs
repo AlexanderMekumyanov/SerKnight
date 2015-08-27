@@ -11,8 +11,8 @@ public class SpiderScript : BaseAIScript
 	void Start () 
     {
         InitPhysics();
-
         InitAnimations();
+        SetState(States.SLEEP);
 	}
 
     public override void InitAnimations()
@@ -25,6 +25,7 @@ public class SpiderScript : BaseAIScript
     public void WakeUp()
     {
         SetState(States.FINDING_ENEMY);
+        rigidBody.isKinematic = false;
     }
 
     public void Attack()
@@ -117,7 +118,11 @@ public class SpiderScript : BaseAIScript
 
     public override void Damaging()
     {
-       // Debug.Log("---------------DAMAGING---------------");
+        if (GetCurrState() == States.DEATH)
+        {
+            return;
+        }
+
         if (--health <= 0)
         {
             myAnimator.SetTrigger("Death");

@@ -4,9 +4,6 @@ using System.Collections.Generic;
 
 public class SpiderBoss : BaseAIScript 
 {
-    public float canAttackDistance;
-
-    public bool isWake = false;
     public float attackDistance;
 
     void Start () 
@@ -73,11 +70,6 @@ public class SpiderBoss : BaseAIScript
     {
         GetComponent<Rigidbody2D>().isKinematic = false;
         SetState(States.FINDING_ENEMY);
-    }
-
-    public void SleepPlease()
-    {
-        isWake = false;
     }
 
     public override void Damaging()

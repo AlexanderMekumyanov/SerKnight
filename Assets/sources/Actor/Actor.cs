@@ -27,7 +27,7 @@ public abstract class Actor : MonoBehaviour//, IAnimationActor, IMovableActor, I
     public void SetState(States newState)
     {
         curState = newState;
-        Debug.Log(curState.ToString());
+        Debug.Log(gameObject.name + " is " + curState.ToString());
     }
 
     public States GetCurrState()
