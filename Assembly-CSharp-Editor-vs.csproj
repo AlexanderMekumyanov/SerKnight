@@ -46,6 +46,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Editor\FillScene.cs" />
+     <Compile Include="Assets\UniMerge\Editor\ObjectMerge.cs" />
+     <Compile Include="Assets\UniMerge\Editor\SceneMerge.cs" />
+     <Compile Include="Assets\UniMerge\Editor\UniMergeConfig.cs" />
+     <Compile Include="Assets\UniMerge\Editor\Util.cs" />
      <Compile Include="Assets\engine\SpritesAndBones\Scripts\Editor\AlphaNumericSort.cs" />
      <Compile Include="Assets\engine\SpritesAndBones\Scripts\Editor\AnimationToPNGMenu.cs" />
      <Compile Include="Assets\engine\SpritesAndBones\Scripts\Editor\BoneEditor.cs" />
@@ -59,6 +64,7 @@
      <Compile Include="Assets\engine\SpritesAndBones\Scripts\Editor\SkinMakerEditor.cs" />
      <Compile Include="Assets\engine\SpritesAndBones\Scripts\Editor\SkinMesh.cs" />
      <Compile Include="Assets\engine\SpritesAndBones\Scripts\Editor\Weightpainter.cs" />
+     <None Include="Assets\UniMerge\readme.txt" />
      <None Include="Assets\engine\SpritesAndBones\license-attributions.txt" />
      <None Include="Assets\StreamingAssets\files\text.xml" />
  <Reference Include="UnityEngine.UI">

@@ -99,6 +99,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\FillScene.cs" />
+    <Compile Include="Assets\UniMerge\Editor\ObjectMerge.cs" />
+    <Compile Include="Assets\UniMerge\Editor\SceneMerge.cs" />
+    <Compile Include="Assets\UniMerge\Editor\UniMergeConfig.cs" />
+    <Compile Include="Assets\UniMerge\Editor\Util.cs" />
     <Compile Include="Assets\engine\SpritesAndBones\Scripts\Editor\AlphaNumericSort.cs" />
     <Compile Include="Assets\engine\SpritesAndBones\Scripts\Editor\AnimationToPNGMenu.cs" />
     <Compile Include="Assets\engine\SpritesAndBones\Scripts\Editor\BoneEditor.cs" />
@@ -116,6 +121,7 @@
   <ItemGroup>
     <None Include="Assets\engine\SpritesAndBones\license-attributions.txt" />
     <None Include="Assets\StreamingAssets\files\text.xml" />
+    <None Include="Assets\UniMerge\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>

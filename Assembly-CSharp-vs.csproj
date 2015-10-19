@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\UniMerge\Demo\TestScript.cs" />
      <Compile Include="Assets\engine\SpritesAndBones\Scripts\AnimationWindowUtils.cs" />
      <Compile Include="Assets\engine\SpritesAndBones\Scripts\Bone.cs" />
      <Compile Include="Assets\engine\SpritesAndBones\Scripts\ControlPoint.cs" />
@@ -134,6 +135,7 @@
      <Compile Include="Assets\sources\ScriptSystem\SpecSpace.cs" />
      <Compile Include="Assets\sources\WeaponScripts\ArmorScript.cs" />
      <Compile Include="Assets\sources\WeaponScripts\AxeWeaponScript.cs" />
+     <None Include="Assets\UniMerge\readme.txt" />
      <None Include="Assets\engine\SpritesAndBones\license-attributions.txt" />
      <None Include="Assets\StreamingAssets\files\text.xml" />
  <Reference Include="UnityEngine.UI">

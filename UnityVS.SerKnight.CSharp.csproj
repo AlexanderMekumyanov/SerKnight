@@ -54,6 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\UniMerge\Demo\TestScript.cs" />
     <Compile Include="Assets\engine\SpritesAndBones\Scripts\AnimationWindowUtils.cs" />
     <Compile Include="Assets\engine\SpritesAndBones\Scripts\Bone.cs" />
     <Compile Include="Assets\engine\SpritesAndBones\Scripts\ControlPoint.cs" />
@@ -146,6 +147,7 @@
   <ItemGroup>
     <None Include="Assets\engine\SpritesAndBones\license-attributions.txt" />
     <None Include="Assets\StreamingAssets\files\text.xml" />
+    <None Include="Assets\UniMerge\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>
