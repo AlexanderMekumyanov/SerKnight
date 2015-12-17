@@ -71,81 +71,91 @@ public class PlayerScript : PhysicableActor
 
     void BaseLogic()
     {
-        if (grounded && Input.GetKeyDown(KeyCode.Space))
-        {
-            rigidBody.AddForce(new Vector2(0f, jumpForce));
-            mAudioSource.PlayOneShot(jumpSound);
-        }
+        //if (grounded && Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    Jump();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            PlayAnimation("Attack");
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            PlayAnimation("Yeah");
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            PlayAnimation("Walk");
-            curSpeed = maxSpeed;
-            if (direction == Direction.LEFT)
-            {
-                Flip();
-                direction = Direction.RIGHT;
-            }
-            mAudioSource.clip = walkSound;
-            mAudioSource.loop = true;
-            mAudioSource.Play();
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            PlayAnimation("Walk");
-            curSpeed = -maxSpeed;
-            if (direction == Direction.RIGHT)
-            {
-                Flip();
-                direction = Direction.LEFT;
-            }
-            mAudioSource.clip = walkSound;
-            mAudioSource.loop = true;
-            mAudioSource.Play();
-        }
-        else
-        {
-            StopAllAnimation();
-            curSpeed = 0.0f;
-            if (mAudioSource.clip == walkSound)
-            {
-                mAudioSource.loop = false;
-                mAudioSource.clip = null;
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    PlayAnimation("Attack");
+        //}
+        //else if (Input.GetKey(KeyCode.D))
+        //{
+        //    PlayAnimation("Yeah");
+        //}
+        //else if (Input.GetKey(KeyCode.RightArrow))
+        //{
+        //    GoRight();
+        //}
+        //else if (Input.GetKey(KeyCode.LeftArrow))
+        //{
+        //    GoLeft();
+        //}
+        //else
+        //{
+        //Idle();
+        //}
         rigidBody.velocity = new Vector2(curSpeed, rigidBody.velocity.y);
+    }
+
+    public void Idle()
+    {
+        StopAllAnimation();
+        curSpeed = 0.0f;
+        if (mAudioSource.clip == walkSound)
+        {
+            mAudioSource.loop = false;
+            mAudioSource.clip = null;
+        }
+    }
+
+    public void Jump()
+    {
+        rigidBody.AddForce(new Vector2(0f, jumpForce));
+        mAudioSource.PlayOneShot(jumpSound);
+    }
+
+    public void GoLeft()
+    {
+        PlayAnimation("Walk");
+        curSpeed = -maxSpeed;
+        if (direction == Direction.RIGHT)
+        {
+            Flip();
+            direction = Direction.LEFT;
+        }
+        mAudioSource.clip = walkSound;
+        mAudioSource.loop = true;
+        mAudioSource.Play();
+    }
+
+    public void GoRight()
+    {
+        PlayAnimation("Walk");
+        curSpeed = maxSpeed;
+        if (direction == Direction.LEFT)
+        {
+            Flip();
+            direction = Direction.RIGHT;
+        }
+        mAudioSource.clip = walkSound;
+        mAudioSource.loop = true;
+        mAudioSource.Play();
     }
 
     void Flip()
     {
-        //
-        //weapon.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
-
-        //this.transform.Rotate(new Vector3(0, 180, 0));
-
-        //Vector3 theScale = transform.localScale;
-        //theScale.x *= -1;
-        //transform.localScale = theScale;
-
-        //this.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
+        Debug.Log("Flipping Before: " + transform.rotation.eulerAngles.ToString());
         if (direction == Direction.RIGHT)
         {
-            this.transform.rotation = new Quaternion(0, 0, 0, this.transform.rotation.w);
+            transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
         }
         else
         {
-            this.transform.rotation = new Quaternion(0, 180, 0, this.transform.rotation.w);
+            transform.rotation = Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f));
         }
-        weapon.transform.localPosition = new Vector3(weapon.transform.localPosition.x, weapon.transform.localPosition.y, weapon.transform.localPosition.z * -1);
-        //this.transform.rotation = Quaternion.Inverse(this.transform.rotation);
+        Debug.Log("Flipping After: " + transform.rotation.eulerAngles.ToString());
     }
 
     public void Equipt(string itemName)
