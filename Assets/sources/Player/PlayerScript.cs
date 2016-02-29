@@ -19,7 +19,10 @@ public class PlayerScript : PhysicableActor
     private GameObject weapon;
 
     public float Health = 3;
-    public float defence = 1; 
+    public float defence = 1;
+
+    [SerializeField]
+    private Transform m_SkeletonTransorm;
 
     void Start()
     {
@@ -126,26 +129,15 @@ public class PlayerScript : PhysicableActor
 
     void Flip()
     {
-        //
-        //weapon.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
-
-        //this.transform.Rotate(new Vector3(0, 180, 0));
-
-        //Vector3 theScale = transform.localScale;
-        //theScale.x *= -1;
-        //transform.localScale = theScale;
-
-        //this.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
         if (direction == Direction.RIGHT)
         {
-            this.transform.rotation = new Quaternion(0, 0, 0, this.transform.rotation.w);
+            m_SkeletonTransorm.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {
-            this.transform.rotation = new Quaternion(0, 180, 0, this.transform.rotation.w);
+            m_SkeletonTransorm.rotation = Quaternion.Euler(0, 180, 0);
         }
-        weapon.transform.localPosition = new Vector3(weapon.transform.localPosition.x, weapon.transform.localPosition.y, weapon.transform.localPosition.z * -1);
-        //this.transform.rotation = Quaternion.Inverse(this.transform.rotation);
+        weapon.transform.localPosition = new Vector3(weapon.transform.localPosition.x, weapon.transform.localPosition.y, weapon.transform.localPosition.z * -1);        
     }
 
     public void Equipt(string itemName)
